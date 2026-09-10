@@ -1,0 +1,5 @@
+saves
+node_modules
+.git
+.env
+*.log

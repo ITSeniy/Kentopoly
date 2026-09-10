@@ -1,0 +1,6732 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Kentopoly — дружеский капитализм</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232561ac'/%3E%3Ctext x='14' y='46' fill='white' font-family='Arial' font-weight='bold' font-size='42'%3EK%3C/text%3E%3C/svg%3E"><style>:root {
+  color-scheme: light dark;
+  --bg: #f5f4f0;
+  --surface: #fff;
+  --soft: #efeee9;
+  --ink: #242b32;
+  --muted: #68737d;
+  --line: #dedfd9;
+  --blue: #2561ac;
+  --bluesoft: #e7f0fc;
+  --red: #b23d38;
+  --green: #237142;
+  --gold: #9b791b;
+  --shadow: 0 6px 24px #18232b08;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    16px/1.5 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button:hover {
+  background: var(--soft);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+button.primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+button.primary:hover {
+  filter: brightness(1.08);
+}
+button.danger {
+  color: var(--red);
+}
+button.small {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #3688eb;
+  outline-offset: 3px;
+}
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 44px;
+}
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+a {
+  color: var(--blue);
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: 44px;
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+h3 {
+  font-size: 18px;
+  line-height: 1.35;
+}
+.muted {
+  color: var(--muted);
+}
+.smalltext {
+  font-size: 14px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.shell {
+  max-width: 1420px;
+  margin: auto;
+  padding: 0 28px 32px;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 88px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.wordmark {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.wordmark span {
+  color: var(--blue);
+}
+.topright,
+.row,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-block;
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.statusdot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 6px;
+}
+.modebanner {
+  font-size: 14px;
+  color: var(--muted);
+  margin: -8px 0 20px;
+}
+.landing {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  padding: 50px 24px 24px;
+  align-items: start;
+}
+.intro h1 {
+  font-size: clamp(40px, 4vw, 62px);
+  max-width: 650px;
+  margin: 16px 0 24px;
+}
+.intro > p {
+  font-size: 18px;
+  max-width: 550px;
+  color: var(--muted);
+}
+.three {
+  display: flex;
+  gap: 32px;
+  margin: 36px 0;
+}
+.three strong {
+  display: block;
+  font-size: 26px;
+  letter-spacing: -0.7px;
+}
+.three span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.featureline {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  max-width: 540px;
+}
+.numtag {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 14px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.card > p {
+  margin-top: 10px;
+}
+.stack {
+  display: grid;
+  gap: 12px;
+}
+.wide {
+  width: 100%;
+}
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+.tabs button {
+  flex: 1;
+}
+.tabs .chosen {
+  background: var(--bluesoft);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 20px 0;
+}
+.notice {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 12px 0;
+}
+.error {
+  color: var(--red);
+}
+.bankchip {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--bank);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  border: 2px solid #ffffff70;
+}
+.playerline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.playerline:last-child {
+  border: 0;
+}
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+.playerline strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.lobby {
+  max-width: 960px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.lobby h2 {
+  margin-bottom: 16px;
+}
+.invite {
+  word-break: break-all;
+  font-size: 14px;
+  background: var(--soft);
+  border-radius: 8px;
+  padding: 12px;
+}
+.gamehead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.gamehead h1 {
+  font-size: 30px;
+  letter-spacing: -0.8px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 24px;
+  align-items: start;
+}
+.board-wrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-rows: repeat(11, minmax(0, 1fr));
+  aspect-ratio: 1;
+  min-width: 792px;
+  gap: 2px;
+  background: var(--line);
+  padding: 2px;
+}
+.tile {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  padding: 8px 4px 5px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: inset 0 5px var(--group, transparent);
+  text-align: center;
+  overflow: hidden;
+}
+.tile:hover,
+.tile.selected {
+  background: var(--bluesoft);
+}
+.tile.selected {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+.tile-name {
+  font-size: 14px;
+  line-height: 1.08;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tile-meta {
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tile.special {
+  background: var(--soft);
+}
+.tile.chance .tile-name {
+  color: var(--blue);
+  font-weight: 700;
+}
+.tile.risk .tile-name {
+  color: var(--red);
+  font-weight: 700;
+}
+.tile.award .tile-name,
+.tile.fountain .tile-name {
+  font-weight: 700;
+}
+.owned {
+  box-shadow:
+    inset 0 5px var(--group, transparent),
+    inset 0 -4px var(--owner);
+}
+.pawnrow {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  min-height: 8px;
+}
+.pawn {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--bank);
+  outline: 1px solid #fff;
+}
+.awardmark {
+  color: var(--gold);
+  position: absolute;
+  right: 3px;
+  top: 5px;
+  font-size: 14px;
+  line-height: 1;
+}
+.center {
+  grid-area: 2/2/11/11;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 3vw, 46px);
+  position: relative;
+}
+.center-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.center-brand {
+  font-size: clamp(36px, 4vw, 60px);
+  font-weight: 850;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.center .subtitle {
+  margin: 12px 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.dice-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-height: 110px;
+  margin: 16px 0;
+}
+.die {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+  padding: 12px;
+  box-shadow: 0 4px 0 var(--line);
+}
+.pip {
+  border-radius: 50%;
+  background: var(--ink);
+}
+.pip.off {
+  opacity: 0;
+}
+.center-players {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.mini-player {
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+}
+.mini-player.current {
+  border-color: var(--blue);
+  box-shadow: inset 3px 0 var(--blue);
+}
+.mini-player.out {
+  opacity: 0.5;
+}
+.mini-name {
+  font-size: 14px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mini-money {
+  font-size: 20px;
+  font-weight: 750;
+  margin: 4px 0;
+  letter-spacing: -0.5px;
+}
+.mini-foot {
+  font-size: 14px;
+  color: var(--muted);
+}
+.board-footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.side {
+  display: grid;
+  gap: 16px;
+}
+.side .card {
+  padding: 20px;
+}
+.phase-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.phase-title h2 {
+  font-size: 22px;
+}
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.phase-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px !important;
+}
+.side .actions button {
+  flex: 1;
+}
+.selection-title {
+  border-left: 4px solid var(--group);
+  padding-left: 12px;
+}
+.metricrow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 10px 0;
+  gap: 8px;
+}
+.metricrow strong {
+  text-align: right;
+}
+.bigmoney {
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -1px;
+  margin: 12px 0;
+}
+.log {
+  max-height: 210px;
+  overflow: auto;
+  font-size: 14px;
+}
+.log p {
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.log p:first-child {
+  color: var(--ink);
+}
+.local-controls {
+  max-width: 240px;
+}
+.local-controls label {
+  margin: 0 0 4px;
+}
+.local-controls select {
+  font-size: 14px;
+  padding: 6px 8px;
+  min-height: 38px;
+}
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.below {
+  margin-top: 20px;
+}
+.checks {
+  max-height: 180px;
+  overflow: auto;
+  background: var(--soft);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  min-height: 40px;
+}
+.check input {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  flex-shrink: 0;
+}
+.offer {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  max-width: 90vw;
+  border-radius: 8px;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+.modal-shade {
+  position: fixed;
+  inset: 0;
+  background: #18233088;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal {
+  width: min(620px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+}
+.modal h2 {
+  margin-bottom: 16px;
+}
+.modal p,
+.modal li {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+.modal .actions {
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+.finish {
+  background: var(--bluesoft);
+  border: 1px solid var(--blue);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.footnote {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+@media (min-width: 1300px) {
+  .board {
+    min-width: 836px;
+  }
+}
+@media (max-width: 1150px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 16px;
+  }
+  .shell {
+    padding: 0 20px 24px;
+  }
+  .board {
+    min-width: 792px;
+  }
+  .board-wrap {
+    max-width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .landing {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 16px 0;
+  }
+  .intro h1 {
+    max-width: 600px;
+  }
+  .three {
+    margin: 24px 0;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .side {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+  .side > .action-card {
+    grid-column: 1/-1;
+    order: -1;
+  }
+  .board-wrap {
+    width: 100%;
+    order: 2;
+    max-height: 65vh;
+  }
+  .center-brand {
+    font-size: 48px;
+  }
+  .center {
+    padding: 28px;
+  }
+  .side .log-card {
+    display: none;
+  }
+  .lobby {
+    grid-template-columns: 1fr;
+    margin: 24px auto;
+  }
+  .gamehead {
+    align-items: start;
+  }
+  .gamehead h1 {
+    font-size: 26px;
+  }
+  .local-controls {
+    width: 180px;
+  }
+  .topbar {
+    min-height: 74px;
+  }
+  .topright .badge {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .shell {
+    padding: 0 16px 24px;
+  }
+  .topbar {
+    gap: 8px;
+  }
+  .wordmark {
+    font-size: 24px;
+  }
+  .topright {
+    gap: 4px;
+  }
+  .topright button {
+    padding: 8px 10px;
+  }
+  .card {
+    padding: 20px;
+  }
+  .three {
+    gap: 20px;
+  }
+  .three strong {
+    font-size: 22px;
+  }
+  .three span {
+    font-size: 14px;
+  }
+  .gamehead {
+    flex-direction: column;
+  }
+  .gamehead h1 {
+    font-size: 26px;
+  }
+  .local-controls {
+    max-width: none;
+    width: 100%;
+  }
+  .side {
+    grid-template-columns: 1fr;
+  }
+  .side > * {
+    grid-column: 1;
+  }
+  .side .portfolio-card {
+    display: none;
+  }
+  .board-wrap {
+    max-height: 55vh;
+  }
+  .modebanner {
+    margin-top: 0;
+  }
+  .intro > p {
+    font-size: 16px;
+  }
+  .modal {
+    padding: 20px;
+  }
+  .center-players {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gamehead .toolbar {
+    width: 100%;
+  }
+  .mini-player {
+    padding: 12px;
+  }
+  .featureline {
+    padding: 12px 0;
+  }
+  .footnote {
+    text-align: left;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #191c20;
+    --surface: #23272c;
+    --soft: #2c3136;
+    --ink: #eef1f5;
+    --muted: #aeb7c1;
+    --line: #41484f;
+    --blue: #447fcf;
+    --bluesoft: #24374f;
+    --red: #ff9c97;
+    --green: #80cda3;
+    --gold: #e3c579;
+  }
+  .bankchip {
+    border-color: #ffffff40;
+  }
+  .tile.chance .tile-name {
+    color: #8ab8f5;
+  }
+  .primary {
+    color: #fff;
+  }
+  .toast {
+    background: #f0f2f4;
+    color: #20242a;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Kentopoly Volume Edition — fixed emerald/glass art direction. */
+:root {
+  color-scheme: dark;
+  --bg: #081c21;
+  --surface: rgba(27, 53, 57, 0.83);
+  --soft: rgba(180, 226, 217, 0.08);
+  --ink: #edf6f0;
+  --muted: #b3c9c5;
+  --line: rgba(213, 244, 232, 0.18);
+  --blue: #b7eacb;
+  --bluesoft: rgba(155, 230, 196, 0.12);
+  --red: #ffaca0;
+  --green: #80ddaa;
+  --gold: #ecd698;
+  --shadow: 0 12px 40px #00141325;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 5%, #25685666, transparent 50%),
+    radial-gradient(ellipse at 95% 70%, #27536755, transparent 48%), #081c21;
+  background-attachment: fixed;
+}
+.shell {
+  max-width: 1800px;
+  padding: 0 28px 24px;
+}
+.topbar {
+  min-height: 72px;
+  margin-bottom: 14px;
+  border-color: #deffee16;
+}
+.wordmark {
+  color: #f0f4e8;
+  font-size: 27px;
+}
+.wordmark span {
+  color: #b7eacb;
+}
+.topright .badge {
+  border-color: #d8f4e326;
+  color: #d9e9db;
+  background: #d4ffe908;
+}
+.card,
+.player-glass,
+.modal,
+.finish {
+  background: linear-gradient(135deg, rgba(224, 255, 237, 0.14), rgba(137, 189, 186, 0.045));
+  border: 1px solid rgba(225, 255, 237, 0.19);
+  box-shadow:
+    inset 0 1px 0 #f0fff213,
+    0 12px 35px #000c1820;
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-radius: 16px;
+}
+button {
+  background: linear-gradient(145deg, #e4fff414, #91c5c30b);
+  border: 1px solid #c7ece12e;
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: inset 0 1px #ffffff0a;
+  min-height: 44px;
+  backdrop-filter: blur(14px);
+}
+button:hover {
+  background: #c9ffdf20;
+  border-color: #dcffed5c;
+}
+button.primary {
+  background: linear-gradient(140deg, #d1f4cf, #a3dbc1);
+  color: #173b32;
+  border-color: #d8ffde90;
+  box-shadow: 0 4px 20px #8dedb816;
+  font-weight: 650;
+}
+button.primary:hover {
+  filter: brightness(1.04);
+}
+button:disabled {
+  opacity: 0.43;
+}
+button.danger {
+  color: #f3afa5;
+  background: #d07a7110;
+}
+input,
+select {
+  background: #031d2370;
+  color: #f1f6ed;
+  border-color: #d5f4e528;
+  border-radius: 10px;
+}
+select option {
+  background: #193c3d;
+  color: #fff;
+}
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid #dbedb4;
+  outline-offset: 3px;
+}
+a {
+  color: #c0e9d7;
+}
+.bankchip {
+  border-color: #ffffff45;
+  box-shadow: inset 0 1px 5px #ffffff35;
+}
+.badge {
+  background: #d6ffee08;
+}
+.modebanner {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #abcac0;
+}
+.eyebrow {
+  color: #9dbbb0;
+  font-size: 14px;
+  letter-spacing: 1.6px;
+}
+.notice {
+  background: #c4edd60c;
+  border-color: #c4edd623;
+}
+.tabs .primary,
+.tabs .chosen {
+  color: #183f35;
+}
+.landing {
+  padding-top: 42px;
+}
+.intro h1 {
+  color: #f0f2df;
+}
+.featureline {
+  border-color: #d4f9e51a;
+}
+.numtag {
+  color: #bde3c3;
+}
+.divider {
+  background: #cfefd722;
+}
+.invite {
+  background: #08242e80;
+}
+.lobby .card {
+  padding: 26px;
+}
+.lobby {
+  max-width: 1000px;
+}
+.modal-shade {
+  background: #05181dab;
+  backdrop-filter: blur(8px);
+}
+.modal {
+  background: linear-gradient(140deg, #274d4aee, #102e34f5);
+  box-shadow:
+    inset 0 1px #f4ffed2e,
+    0 24px 90px #00131990;
+}
+.modal h2 {
+  color: #f1f3df;
+}
+.checks {
+  background: #071e2766;
+}
+.offer {
+  background: #b3e5c90a;
+  border-color: #d6f5e02c;
+}
+.toast {
+  background: #d5f0de;
+  color: #122e2b;
+  border: 1px solid #eaffec;
+}
+.footnote {
+  font-size: 14px;
+  color: #9bb8ae;
+  margin-top: 18px;
+  line-height: 1.5;
+}
+.gamehead {
+  margin-bottom: 16px;
+  align-items: center;
+}
+.gamehead h1 {
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  margin-top: 4px;
+}
+.gamehead .toolbar {
+  align-items: center;
+}
+.local-controls select {
+  min-height: 44px;
+}
+.local-controls label {
+  font-weight: 500;
+  color: #abc8bd;
+}
+.is-playing .topbar {
+  min-height: 64px;
+}
+.is-playing .modebanner {
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.is-playing .footnote {
+  margin-top: 14px;
+}
+.world-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+.play-column {
+  min-width: 0;
+}
+.scene-stage {
+  position: relative;
+  height: clamp(550px, calc(100vh - 305px), 820px);
+  min-height: 550px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 53%, #2b7c6266 0%, #1b514845 43%, #0b292c40 72%);
+  border: 1px solid #cbf8db15;
+  box-shadow:
+    inset 0 1px 0 #d2ffec18,
+    inset 0 0 75px #000d1830;
+}
+#scene-host {
+  position: absolute;
+  inset: 0;
+}
+.world-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: 0;
+}
+.world-canvas:focus-visible {
+  outline: 2px solid #c5ead0;
+  outline-offset: -4px;
+  border-radius: 20px;
+}
+.scene-head {
+  position: absolute;
+  z-index: 3;
+  left: 22px;
+  right: 22px;
+  top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+.scene-label {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 650;
+  color: #cbe3d5;
+}
+.scene-head #camera-status {
+  font-size: 14px;
+  color: #b5cec3;
+  background: #163a3550;
+  border: 1px solid #d7ffe220;
+  border-radius: 7px;
+  padding: 5px 10px;
+  backdrop-filter: blur(12px);
+}
+.scene-controls {
+  position: absolute;
+  z-index: 5;
+  bottom: 16px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: end;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.scene-controls button {
+  pointer-events: auto;
+  background: linear-gradient(125deg, #20483ce6, #143a3ec7);
+  border-color: #d7f5df38;
+  font-size: 14px;
+  padding: 9px 12px;
+  min-height: 44px;
+}
+.scene-controls button:hover {
+  background: #385e50ee;
+}
+.camera-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 85%;
+}
+.view-switch {
+  white-space: nowrap;
+}
+.pawn-caption {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  z-index: 4;
+  background: #173d38bd;
+  backdrop-filter: blur(10px);
+  color: #ebf7df;
+  border: 1px solid #d2f6b663;
+  font-size: 14px;
+  font-weight: 650;
+  padding: 3px 10px;
+  border-radius: 7px;
+  box-shadow: 0 4px 15px #001c2430;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+}
+.table-journal {
+  position: absolute;
+  z-index: 4;
+  width: 220px;
+  height: 116px;
+  background: linear-gradient(130deg, #d5ffe530, #d0fff710);
+  color: #f6ffe8;
+  border: 1px solid #ddffda45;
+  border-radius: 11px;
+  box-shadow:
+    inset 0 1px #edffdf22,
+    0 8px 22px #022c3829;
+  backdrop-filter: blur(15px) saturate(130%);
+  -webkit-backdrop-filter: blur(15px) saturate(130%);
+  padding: 6px 10px;
+  overflow: hidden;
+  opacity: 0;
+}
+.table-journal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  gap: 4px;
+}
+.table-journal strong {
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+.table-journal header button {
+  min-width: 44px;
+  min-height: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: #efffe6;
+  font-size: 20px;
+}
+.journal-lines {
+  font-size: 14px;
+  line-height: 1.35;
+  display: grid;
+  gap: 5px;
+}
+.journal-lines p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #e3f1df;
+  margin: 0;
+}
+.table-journal.compact {
+  padding: 2px 7px;
+}
+.table-journal.compact .journal-lines p:nth-child(n + 2) {
+  display: none;
+}
+.table-journal.compact .journal-lines p {
+  -webkit-line-clamp: 1;
+}
+.scene-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 4px;
+  color: #9fc4b6;
+  font-size: 14px;
+  min-width: 0;
+}
+.scene-info > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.tile-picker-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.tile-picker-label select {
+  width: 210px;
+  font-size: 14px;
+  padding: 7px 10px;
+  min-height: 40px;
+}
+.player-dock {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+}
+.player-glass {
+  padding: 12px;
+  min-width: 0;
+  border-radius: 13px;
+  position: relative;
+}
+.player-glass:before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--player-color);
+  opacity: 0.7;
+}
+.player-glass.active {
+  border-color: #cfe9b978;
+  background: linear-gradient(125deg, #a3dbaa25, #a5dfd10f);
+}
+.player-glass.out {
+  opacity: 0.5;
+}
+.player-glass .row {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+.player-glass .row strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.player-glass .bankchip {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  flex: 0 0 28px;
+}
+.dock-money {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 6px 0 3px;
+  font-variant-numeric: tabular-nums;
+}
+.dock-meta {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #b8d4c5;
+}
+.side {
+  gap: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-width: 0;
+}
+.side .card {
+  padding: 20px;
+}
+.phase-title h2 {
+  font-size: 21px;
+}
+.phase-desc {
+  color: #bdd2c8;
+  line-height: 1.5;
+}
+.timer {
+  border-color: #e6f5d735;
+  background: #defcd30a;
+  font-size: 14px;
+  color: #d9e5c6;
+}
+.bigmoney {
+  font-size: 29px;
+  color: #eff4dc;
+}
+.selection-title h2 {
+  font-size: 22px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.selection-title {
+  border-width: 3px;
+}
+.selection-title p {
+  margin-top: 6px;
+  color: #a9c7bb;
+}
+.metricrow {
+  font-size: 14px;
+  color: #b8d0c1;
+}
+.metricrow strong {
+  color: #e8f2db;
+}
+.side .eyebrow {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.side .stack button {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+}
+.side .actions button {
+  font-size: 14px;
+}
+.side > button.danger {
+  justify-self: stretch;
+  font-size: 14px;
+  min-height: 44px;
+}
+.finish {
+  background: linear-gradient(125deg, #c4ecb325, #a6d9cf14);
+  border-color: #d5edb650;
+  padding: 18px 22px;
+}
+.finish h2 {
+  font-size: 24px;
+}
+.mode-2d #table-journal {
+  position: absolute;
+  left: auto !important;
+  top: auto !important;
+  right: 17%;
+  bottom: 20%;
+  width: 230px !important;
+  height: 116px !important;
+  opacity: 1 !important;
+}
+.fallback-board {
+  height: 100%;
+  overflow: auto;
+}
+.fallback-board .board {
+  width: 100%;
+  min-width: 792px;
+}
+.fallback-board .tile {
+  color: #153b35;
+  background: #e3eadc;
+}
+.fallback-board .tile-meta {
+  color: #396054;
+}
+.fallback-board .center {
+  background: #154b3f;
+}
+.fallback-board .center-players {
+  display: none;
+}
+.fallback-notice {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  right: 20px;
+  background: #082b32dd;
+  z-index: 3;
+}
+.fallback-board .center-brand {
+  font-size: 40px;
+}
+.fallback-board .board-footer {
+  color: #d2e4cb;
+}
+.fallback-board .tile.selected {
+  background: #b9d8b4;
+}
+.fallback-board .tile.special {
+  background: #cbd9c9;
+}
+@media (min-width: 1550px) {
+  .world-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  .scene-stage {
+    height: clamp(650px, calc(100vh - 300px), 920px);
+  }
+  .player-dock {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1200px) {
+  .shell {
+    padding: 0 18px 22px;
+  }
+  .world-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 14px;
+  }
+  .scene-stage {
+    min-height: 540px;
+    height: 600px;
+  }
+  .player-dock {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .scene-info {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tile-picker-label {
+    width: 100%;
+  }
+  .tile-picker-label select {
+    flex: 1;
+  }
+  .camera-buttons {
+    max-width: 85%;
+  }
+  .scene-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .scene-controls button {
+    padding: 8px 10px;
+  }
+  .scene-head {
+    left: 16px;
+    right: 16px;
+    top: 14px;
+  }
+  .scene-label {
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 900px) {
+  .world-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .play-column {
+    width: 100%;
+  }
+  .world-layout > .side {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .world-layout > .side > .action-card {
+    grid-column: auto;
+  }
+  .world-layout > .side > button {
+    grid-column: 1/-1;
+  }
+  .scene-stage {
+    height: 600px;
+    min-height: 500px;
+  }
+  .player-dock {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    gap: 10px;
+  }
+  .player-glass {
+    min-width: 168px;
+    flex: 1;
+  }
+  .scene-info {
+    flex-direction: row;
+    align-items: center;
+  }
+  .scene-info > span {
+    display: none;
+  }
+  .tile-picker-label {
+    max-width: 100%;
+  }
+  .gamehead .toolbar {
+    width: auto;
+  }
+  .local-controls {
+    width: 170px;
+  }
+  .table-journal {
+    backdrop-filter: blur(12px);
+  }
+}
+@media (max-width: 550px) {
+  .shell {
+    padding: 0 12px 20px;
+  }
+  .topbar {
+    min-height: 62px !important;
+    margin-bottom: 12px;
+  }
+  .wordmark {
+    font-size: 25px;
+  }
+  .topright button {
+    padding: 8px 10px;
+  }
+  .modebanner {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .gamehead {
+    gap: 10px;
+    flex-direction: row;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+  .gamehead h1 {
+    font-size: 24px;
+  }
+  .gamehead .eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.8px;
+  }
+  .gamehead .toolbar {
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+  }
+  .local-controls {
+    width: auto;
+    flex: 1;
+    max-width: 230px;
+  }
+  .local-controls select {
+    font-size: 14px;
+  }
+  .scene-stage {
+    height: 490px;
+    min-height: 490px;
+    border-radius: 16px;
+  }
+  .scene-head {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .scene-label {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+  .scene-head #camera-status {
+    font-size: 14px;
+    padding: 3px 7px;
+  }
+  .camera-buttons {
+    max-width: 100%;
+    gap: 5px;
+  }
+  .scene-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+  .camera-buttons button {
+    font-size: 14px;
+    padding: 8px;
+    flex: 1;
+    white-space: nowrap;
+  }
+  .camera-buttons button:nth-child(n + 3) {
+    min-width: 44px;
+    max-width: 46px;
+  }
+  .view-switch {
+    align-self: flex-end;
+    min-height: 36px !important;
+    font-size: 14px !important;
+    padding: 4px 10px !important;
+  }
+  .player-glass {
+    min-width: 164px;
+  }
+  .world-layout > .side {
+    display: flex;
+    flex-direction: column;
+  }
+  .world-layout > .side > .card {
+    width: 100%;
+    padding: 20px;
+  }
+  .side .phase-title h2 {
+    font-size: 22px;
+  }
+  .scene-info {
+    padding: 10px 0;
+  }
+  .tile-picker-label select {
+    width: 190px;
+  }
+  .dock-money {
+    font-size: 20px;
+  }
+  .footnote {
+    text-align: left;
+  }
+  .table-journal strong {
+    font-size: 14px;
+  }
+  .table-journal header {
+    height: 32px;
+  }
+  .table-journal header button {
+    min-width: 36px;
+    min-height: 32px;
+    height: 32px;
+  }
+  .modal {
+    padding: 22px;
+    background: #163b3bf5;
+  }
+  .modal-shade {
+    padding: 14px;
+  }
+  .landing {
+    padding-top: 18px;
+  }
+  .intro h1 {
+    font-size: 43px;
+  }
+  .intro .three {
+    gap: 22px;
+  }
+  .lobby {
+    margin-top: 18px;
+  }
+  .lobby .card {
+    padding: 22px;
+  }
+  .is-playing .footnote {
+    font-size: 14px;
+  }
+  .scene-stage.mode-2d {
+    height: 540px;
+  }
+  .scene-head #camera-status {
+    max-width: 100%;
+  }
+  .pawn-caption {
+    font-size: 14px;
+    padding: 2px 7px;
+    max-width: 140px;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .card,
+  .player-glass,
+  .modal,
+  .table-journal,
+  .scene-controls button {
+    background: #173d3d;
+    backdrop-filter: none;
+  }
+}
+
+.table-journal.compact header {
+  height: 38px;
+}
+.table-journal.compact header button {
+  min-width: 38px;
+  min-height: 38px;
+  height: 38px;
+}
+.timer {
+  white-space: nowrap;
+}
+.scene-head {
+  max-width: calc(100% - 32px);
+}
+
+.table-journal .journal-lines p:nth-child(n + 3) {
+  display: none;
+}
+
+.table-journal.micro {
+  padding: 0;
+}
+.table-journal.micro header {
+  height: 100%;
+}
+.table-journal.micro header strong,
+.table-journal.micro .journal-lines {
+  display: none;
+}
+.table-journal.micro header button {
+  width: 100%;
+  height: 100%;
+  min-height: 42px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+/* Full viewport table. All UI belongs to this scene; no board fallback. */
+:root {
+  --bg: #157f92;
+  --card: rgba(10, 42, 62, 0.78);
+  --ink: #f4fcff;
+  --muted: #bcdae6;
+  --line: rgba(224, 250, 255, 0.21);
+  --accent: #ffe074;
+  --dark: #123e58;
+  color-scheme: dark;
+}
+html,
+body,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+body {
+  background: #157f92;
+  color: var(--ink);
+  font:
+    16px/1.45 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+.table-world {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: #198a93;
+}
+#scene-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.world-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  min-height: 44px;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: rgba(231, 249, 255, 0.09);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button:hover:not(:disabled) {
+  background: rgba(231, 249, 255, 0.18);
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+button.primary {
+  background: #ffe074;
+  color: #193d53;
+  border-color: #ffe074;
+  font-weight: 750;
+}
+button.primary:hover:not(:disabled) {
+  background: #ffea9a;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #8cf4ff;
+  outline-offset: 2px;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: #143a50;
+  color: var(--ink);
+}
+option {
+  background: #143a50;
+  color: white;
+}
+label {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 12px 0 6px;
+}
+.muted,
+.smalltext,
+.dock-meta {
+  color: var(--muted);
+}
+.smalltext {
+  font-size: 14px;
+  line-height: 1.4;
+}
+h2 {
+  font-size: 22px;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+.card {
+  padding: 18px;
+  background: rgba(10, 42, 62, 0.83);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 10px 35px #061e352b;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--ink);
+}
+.card p {
+  margin: 10px 0;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.row.between {
+  justify-content: space-between;
+}
+.wide {
+  width: 100%;
+}
+.notice {
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #268d9126;
+  border-radius: 12px;
+  font-size: 14px;
+  margin: 14px 0;
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 16px 0;
+}
+.hud-top {
+  position: absolute;
+  z-index: 6;
+  top: 18px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: none;
+}
+.hud-top > * {
+  pointer-events: auto;
+}
+.hud-brand {
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 14px #0b3b65;
+}
+.hud-brand span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #ffe88d;
+  margin-top: 6px;
+}
+.turn-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #123d59c9;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 10px 20px;
+  backdrop-filter: blur(18px);
+}
+.turn-banner strong {
+  font-size: 18px;
+}
+.turn-banner span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.hud-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.control-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.control-label select {
+  width: 130px;
+}
+.my-bank {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hud-tools > button {
+  background: #143e57bf;
+  backdrop-filter: blur(18px);
+}
+.player-dock {
+  position: absolute;
+  z-index: 5;
+  top: 116px;
+  left: 24px;
+  bottom: auto;
+  right: auto;
+  width: 174px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  transform: none;
+}
+.player-glass {
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--player-color);
+  background: #103b54ba;
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+.player-glass.active {
+  background: #123d59ed;
+  border-color: var(--player-color);
+  transform: none;
+}
+.player-glass.out {
+  opacity: 0.5;
+}
+.player-glass strong {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dock-money {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 4px 0;
+}
+.dock-meta {
+  font-size: 12px;
+  line-height: 1.45;
+}
+.bank-chip {
+  flex-shrink: 0;
+}
+.hud-actions {
+  position: absolute;
+  z-index: 5;
+  right: 24px;
+  top: 112px;
+  bottom: 100px;
+  width: 274px;
+  overflow: auto;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 2px 10px;
+}
+.hud-actions > .card {
+  flex: none;
+  padding: 17px;
+}
+.hud-actions h2 {
+  font-size: 21px;
+}
+.hud-actions .stack button,
+.hud-actions button {
+  font-size: 14px;
+}
+.hud-actions .hero-number {
+  font-size: 29px;
+}
+.hud-actions .row {
+  flex-wrap: wrap;
+}
+.asset-switch {
+  flex: none;
+}
+.asset-switch button {
+  width: 100%;
+  text-align: left;
+  background: #143c54d9;
+  backdrop-filter: blur(18px);
+}
+.asset-inspector .card {
+  padding: 15px;
+}
+.asset-inspector .stat-grid {
+  gap: 8px;
+}
+.hud-bottom {
+  position: absolute;
+  z-index: 7;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: none;
+}
+.hud-bottom > * {
+  pointer-events: auto;
+}
+.camera-buttons {
+  display: flex;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  flex: none;
+}
+.camera-buttons button {
+  min-width: 44px;
+  white-space: nowrap;
+  background: #123c56dc;
+  padding: 9px 12px;
+  backdrop-filter: blur(18px);
+}
+.tile-picker-label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  color: #f5fcff;
+  text-shadow: 0 1px 8px #0c314e;
+}
+.tile-picker-label select {
+  width: 210px;
+  background: #123c56dc;
+}
+.history-controls {
+  display: flex;
+  gap: 5px;
+}
+.history-controls button {
+  background: #123c56dc;
+  backdrop-filter: blur(18px);
+}
+.board-chronicle {
+  position: absolute;
+  z-index: 3;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  padding: 0;
+  pointer-events: none;
+  color: #fff8d7;
+  text-shadow:
+    0 1px 4px #003d39,
+    0 2px 10px #003d3980;
+  font-size: 15px;
+  line-height: 1.28;
+  overflow: hidden;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+.board-chronicle p {
+  margin: 0 0 6px;
+  padding: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 550;
+  color: white;
+}
+.board-chronicle p:last-child {
+  font-weight: 750;
+  color: #fff0a1;
+}
+.pawn-caption {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  background: #103c58de;
+  color: white;
+  font-size: 13px;
+  line-height: 1.3;
+  border: 1px solid #e0fbff55;
+  border-radius: 8px;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.camera-status {
+  position: absolute;
+  left: 50%;
+  bottom: 76px;
+  transform: translateX(-50%);
+  z-index: 4;
+  font-size: 12px;
+  color: #e2fbff;
+  pointer-events: none;
+  text-shadow: 0 1px 4px #123c56;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.entry-title {
+  position: absolute;
+  z-index: 3;
+  left: 32px;
+  top: 28px;
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 15px #074058;
+}
+.entry-title span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #fff0a1;
+}
+.entry-overlay {
+  position: absolute;
+  z-index: 4;
+  right: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100dvh - 145px);
+  overflow: auto;
+}
+.entry-overlay .landing {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+.entry-overlay .intro {
+  display: none;
+}
+.entry-overlay .lobby {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+.entry-overlay .lobby > .card {
+  margin-bottom: 12px;
+}
+.entry-overlay .card {
+  background: #0c3149e8;
+}
+.entry-overlay h1 {
+  font-size: 26px;
+}
+.entry-overlay .three {
+  gap: 8px;
+}
+.entry-overlay .stats {
+  flex-wrap: wrap;
+}
+.entry-overlay .lobby-layout {
+  display: block;
+}
+.entry-overlay .lobby-layout > * {
+  margin-bottom: 12px;
+}
+.entry-table .world-canvas {
+  opacity: 0.9;
+}
+.modal-overlay,
+.modal-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #052237a8;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.modal {
+  color: var(--ink);
+  background: #10354dec;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  max-height: 90dvh;
+  overflow: auto;
+  max-width: 760px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.modal h2 {
+  font-size: 25px;
+}
+.modal .card {
+  background: #123f577d;
+}
+.graphics-error {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(440px, calc(100% - 40px));
+  padding: 24px;
+  background: #123b53ed;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+.toast {
+  z-index: 60;
+}
+@media (max-width: 1100px) {
+  .hud-top {
+    left: 16px;
+    right: 16px;
+  }
+  .hud-brand {
+    font-size: 25px;
+  }
+  .player-dock {
+    left: 16px;
+    width: 150px;
+  }
+  .hud-actions {
+    right: 16px;
+    width: 240px;
+  }
+  .hud-bottom {
+    left: 16px;
+    right: 16px;
+    gap: 8px;
+  }
+  .camera-buttons button,
+  .history-controls button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  .tile-picker-label select {
+    width: 170px;
+  }
+  .turn-banner {
+    padding: 8px 14px;
+  }
+  .turn-banner strong {
+    font-size: 16px;
+  }
+  .control-label {
+    font-size: 0;
+  }
+}
+@media (max-width: 850px) {
+  .hud-top {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .hud-brand {
+    font-size: 24px;
+  }
+  .hud-brand span {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .hud-tools {
+    gap: 6px;
+  }
+  .control-label select {
+    font-size: 14px;
+    width: 90px;
+    padding: 8px;
+  }
+  .hud-tools > button {
+    padding: 9px 12px;
+    font-size: 14px;
+  }
+  .turn-banner {
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    backdrop-filter: none;
+    text-shadow: 0 1px 5px #075278;
+  }
+  .turn-banner strong {
+    font-size: 14px;
+  }
+  .turn-banner span {
+    font-size: 11px;
+  }
+  .player-dock {
+    top: 100px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    pointer-events: auto;
+    scrollbar-width: none;
+    padding: 0;
+    bottom: auto;
+  }
+  .player-glass {
+    width: 126px;
+    min-width: 126px;
+    padding: 7px 9px;
+    border-radius: 12px;
+  }
+  .player-glass strong {
+    font-size: 13px;
+  }
+  .dock-money {
+    font-size: 17px;
+    margin: 2px 0;
+  }
+  .dock-meta {
+    font-size: 10px;
+  }
+  .player-glass .bank-chip {
+    width: 23px;
+    height: 23px;
+    font-size: 12px;
+  }
+  .hud-actions {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 113px;
+    width: auto;
+    max-height: 29dvh;
+    padding: 0;
+    gap: 6px;
+  }
+  .hud-actions > .card {
+    padding: 14px 16px;
+    border-radius: 16px;
+  }
+  .hud-actions h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .hud-actions .stack {
+    gap: 6px;
+  }
+  .hud-actions p {
+    margin: 6px 0;
+  }
+  .hud-actions .hero-number {
+    font-size: 25px;
+  }
+  .hud-bottom {
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 5px;
+  }
+  .camera-buttons {
+    grid-column: 1/-1;
+    justify-content: center;
+    gap: 5px;
+  }
+  .camera-buttons button {
+    padding: 8px 10px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+  .tile-picker-label {
+    font-size: 12px;
+    gap: 5px;
+    min-width: 0;
+  }
+  .tile-picker-label select {
+    min-width: 0;
+    flex: 1;
+    width: 100%;
+    font-size: 13px;
+    padding: 8px;
+  }
+  .history-controls {
+    gap: 4px;
+  }
+  .history-controls button {
+    font-size: 12px;
+    padding: 8px;
+    min-height: 44px;
+  }
+  .board-chronicle {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  .board-chronicle p {
+    margin-bottom: 4px;
+  }
+  .camera-status {
+    display: none;
+  }
+  .entry-title {
+    left: 20px;
+    top: 18px;
+    font-size: 29px;
+  }
+  .entry-overlay {
+    right: 16px;
+    max-height: calc(100dvh - 118px);
+  }
+  .entry-overlay .card {
+    padding: 20px;
+  }
+  .modal-overlay,
+  .modal-shade {
+    padding: 12px;
+  }
+  .modal {
+    padding: 18px;
+    max-height: 92dvh;
+  }
+  .modal .two {
+    grid-template-columns: 1fr;
+  }
+  .my-bank {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .card,
+  .player-glass,
+  .modal,
+  .turn-banner {
+    backdrop-filter: none;
+    background: #123b52;
+  }
+}
+
+.camera-buttons button {
+  flex: none;
+  width: auto;
+}
+@media (max-width: 850px) {
+  .hud-actions {
+    border-radius: 16px;
+  }
+  .hud-actions[data-phase="manage"] > .card [data-action="liquidate"] {
+    display: none;
+  }
+  .hud-actions:not(:has(.asset-inspector)) .asset-switch {
+    display: none;
+  }
+  .camera-buttons button {
+    padding: 8px 10px;
+  }
+}
+
+/* Game HUD pass — tactile tabletop controls instead of website cards. */
+:root {
+  --hud-deep: #08283f;
+  --hud-mid: #104967;
+  --hud-gold: #ffe074;
+  --hud-gold-dark: #a9751d;
+  --hud-cyan: #79efff;
+}
+body {
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+.table-world::before,
+.table-world::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.table-world::before {
+  z-index: 2;
+  background:
+    radial-gradient(circle at 50% 47%, transparent 35%, rgba(2, 21, 40, 0.12) 74%, rgba(2, 16, 32, 0.48) 100%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 9px);
+}
+.table-world::after {
+  z-index: 2;
+  inset: 10px;
+  border: 1px solid rgba(194, 243, 255, 0.08);
+  clip-path: polygon(0 0, 70px 0, 70px 2px, calc(100% - 70px) 2px, calc(100% - 70px) 0, 100% 0, 100% 70px, calc(100% - 2px) 70px, calc(100% - 2px) calc(100% - 70px), 100% calc(100% - 70px), 100% 100%, calc(100% - 70px) 100%, calc(100% - 70px) calc(100% - 2px), 70px calc(100% - 2px), 70px 100%, 0 100%, 0 calc(100% - 70px), 2px calc(100% - 70px), 2px 70px, 0 70px);
+}
+.live-table button,
+.entry-table button,
+.modal button {
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(65, 126, 157, 0.78), rgba(9, 47, 72, 0.94));
+  border-color: rgba(190, 237, 249, 0.28);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12), inset 0 -2px rgba(0, 11, 25, 0.28), 0 4px 12px rgba(0, 19, 38, 0.18);
+  font-weight: 700;
+}
+.live-table button:hover:not(:disabled),
+.entry-table button:hover:not(:disabled),
+.modal button:hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(91, 157, 188, 0.88), rgba(13, 62, 91, 0.98));
+  border-color: rgba(194, 245, 255, 0.55);
+  transform: translateY(-1px);
+}
+.live-table button:active:not(:disabled),
+.entry-table button:active:not(:disabled),
+.modal button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 5px rgba(0, 10, 25, 0.38);
+}
+.live-table button.primary,
+.entry-table button.primary,
+.modal button.primary {
+  color: #17384b;
+  background: linear-gradient(180deg, #fff3a8 0%, #ffd45d 58%, #e8ad31 100%);
+  border-color: #fff0a2;
+  box-shadow: inset 0 1px #fffbd8, inset 0 -2px #ba8125, 0 4px 0 var(--hud-gold-dark), 0 8px 22px rgba(255, 205, 70, 0.18);
+  text-shadow: 0 1px rgba(255, 255, 255, 0.55);
+}
+.live-table button.primary:hover:not(:disabled),
+.entry-table button.primary:hover:not(:disabled),
+.modal button.primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fffbd0, #ffe16e 58%, #f0bb3f);
+  border-color: white;
+}
+.hud-brand,
+.entry-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hud-brand i,
+.entry-title i {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border: 2px solid #fff1a0;
+  border-radius: 50%;
+  color: #143a52;
+  background: radial-gradient(circle at 32% 25%, #fff8bc, #ffd35d 56%, #bd7d1c 100%);
+  box-shadow: inset 0 0 0 4px rgba(110, 69, 15, 0.2), 0 4px 14px rgba(1, 26, 48, 0.35);
+  font: italic 900 25px/1 Georgia, serif;
+  text-shadow: 0 1px #fff9c8;
+}
+.hud-brand > div,
+.entry-title > div {
+  line-height: 1;
+}
+.turn-banner {
+  min-width: 340px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-radius: 4px;
+  border-color: rgba(255, 224, 116, 0.5);
+  background: linear-gradient(180deg, rgba(20, 77, 105, 0.96), rgba(6, 35, 57, 0.96));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.11), inset 0 -3px rgba(0, 12, 28, 0.28), 0 8px 26px rgba(0, 24, 44, 0.3);
+  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
+}
+.turn-banner > div {
+  min-width: 0;
+}
+.turn-banner b {
+  color: var(--hud-gold);
+  border-left: 1px solid rgba(255, 224, 116, 0.35);
+  padding-left: 12px;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  white-space: nowrap;
+}
+.turn-pulse {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: var(--hud-cyan);
+  box-shadow: 0 0 0 4px rgba(121, 239, 255, 0.13), 0 0 12px var(--hud-cyan);
+  animation: hud-pulse 1.8s ease-in-out infinite;
+}
+@keyframes hud-pulse {
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+.player-glass {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 11px 10px 14px;
+  border: 1px solid rgba(206, 242, 251, 0.22);
+  border-left: 4px solid var(--player-color);
+  border-radius: 4px 12px 12px 4px;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--player-color) 16%, transparent), transparent 42%), linear-gradient(180deg, rgba(18, 69, 94, 0.92), rgba(5, 37, 59, 0.92));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 5px 16px rgba(0, 24, 43, 0.18);
+}
+.player-glass::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: -32px;
+  width: 72px;
+  height: 72px;
+  border: 1px solid color-mix(in srgb, var(--player-color) 38%, transparent);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.player-glass.active {
+  border-color: var(--player-color);
+  border-left-width: 4px;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--player-color) 28%, transparent), transparent 52%), linear-gradient(180deg, rgba(21, 78, 103, 0.98), rgba(5, 39, 60, 0.98));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--player-color) 45%, transparent), 0 0 20px color-mix(in srgb, var(--player-color) 22%, transparent);
+}
+.seat-number {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  color: rgba(222, 246, 251, 0.18);
+  font: 900 24px/1 Arial, sans-serif;
+}
+.active-flag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 7px 3px 9px;
+  color: #17384b;
+  background: var(--player-color);
+  border-radius: 0 0 0 7px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.dock-money {
+  color: #fff3a7;
+  text-shadow: 0 1px 8px rgba(255, 224, 116, 0.2);
+}
+.action-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px 18px 18px 5px;
+  border-left: 4px solid var(--hud-gold);
+  background: linear-gradient(145deg, rgba(22, 80, 103, 0.96), rgba(5, 33, 54, 0.96));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 12px 34px rgba(0, 21, 42, 0.34);
+}
+.action-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -55px;
+  top: -55px;
+  border: 1px solid rgba(255, 224, 116, 0.14);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.phase-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0 12px;
+  color: #aeeaf1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.phase-emblem {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid rgba(255, 224, 116, 0.5);
+  border-radius: 50%;
+  background: rgba(255, 224, 116, 0.1);
+  color: var(--hud-gold);
+  font-size: 14px;
+}
+.phase-title h2 {
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+.timer {
+  color: #17384b;
+  background: var(--hud-gold);
+  border-color: #fff0a2;
+  font-weight: 900;
+}
+.hud-actions [data-action="roll"] {
+  min-height: 60px;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hud-actions [data-action="roll"]::before {
+  content: "🎲";
+  margin-right: 8px;
+}
+.asset-switch button {
+  border-left: 3px solid #73d8e9;
+  border-radius: 4px 10px 10px 4px;
+}
+.hud-bottom {
+  padding: 6px;
+}
+.camera-buttons,
+.history-controls,
+.tile-picker-label {
+  background: linear-gradient(180deg, rgba(14, 62, 88, 0.94), rgba(5, 35, 56, 0.94));
+  border: 1px solid rgba(200, 239, 249, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 20, 40, 0.22), inset 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+}
+.camera-buttons {
+  gap: 3px;
+  padding: 4px;
+  border-radius: 12px;
+}
+.camera-buttons button,
+.history-controls button {
+  min-height: 38px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  background: rgba(64, 122, 150, 0.24);
+}
+.history-controls {
+  gap: 3px;
+  padding: 4px;
+  border-radius: 12px;
+}
+.tile-picker-label {
+  padding: 4px 4px 4px 10px;
+  border-radius: 12px;
+}
+.tile-picker-label > span {
+  color: #9ed4df;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+.tile-picker-label select {
+  min-height: 38px;
+  border: 0;
+  background: rgba(4, 29, 48, 0.72);
+  font-weight: 700;
+}
+.entry-title {
+  gap: 12px;
+}
+.entry-title i {
+  width: 54px;
+  height: 54px;
+  flex-basis: 54px;
+  font-size: 30px;
+}
+.entry-title span {
+  margin-top: 7px;
+}
+.entry-slogan {
+  position: absolute;
+  z-index: 3;
+  left: clamp(32px, 7vw, 110px);
+  top: 50%;
+  transform: translateY(-44%);
+  width: min(480px, 38vw);
+  text-shadow: 0 4px 28px rgba(2, 32, 53, 0.55);
+}
+.entry-slogan strong {
+  display: block;
+  color: #fff8dc;
+  font-size: clamp(36px, 4.2vw, 68px);
+  line-height: 0.97;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+.entry-slogan span {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 7px 12px;
+  border-left: 3px solid var(--hud-gold);
+  color: #d7f3f8;
+  background: rgba(5, 39, 62, 0.45);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.entry-overlay .card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px 22px 22px 6px;
+  border-left: 4px solid var(--hud-gold);
+  background: linear-gradient(145deg, rgba(15, 61, 86, 0.97), rgba(5, 33, 54, 0.97));
+  box-shadow: 0 22px 70px rgba(0, 20, 40, 0.46), inset 0 1px rgba(255, 255, 255, 0.1);
+}
+.entry-overlay .card::after {
+  content: "KENTOPOLY // SETUP";
+  display: block;
+  margin-top: 18px;
+  color: rgba(183, 224, 235, 0.42);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+.entry-overlay h2 {
+  color: #fff4b2;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.entry-overlay input,
+.entry-overlay select {
+  background: rgba(2, 29, 48, 0.82);
+  border-color: rgba(189, 234, 245, 0.3);
+  box-shadow: inset 0 2px 7px rgba(0, 11, 27, 0.3);
+}
+@media (max-width: 1000px) {
+  .entry-slogan { width: 34vw; }
+  .entry-slogan strong { font-size: clamp(32px, 4.6vw, 52px); }
+  .turn-banner { min-width: 280px; }
+}
+@media (max-width: 850px) {
+  .table-world::after { display: none; }
+  .hud-brand i { width: 38px; height: 38px; flex-basis: 38px; font-size: 21px; }
+  .turn-banner {
+    min-width: 0;
+    padding: 5px 9px;
+    border-color: rgba(255, 224, 116, 0.3);
+    background: rgba(6, 39, 61, 0.78);
+    clip-path: none;
+  }
+  .turn-banner b,
+  .turn-pulse { display: none; }
+  .player-dock { top: 106px; }
+  .player-glass { border-radius: 4px 10px 10px 4px; }
+  .hud-bottom { padding: 0; }
+  .entry-slogan { display: none; }
+  .entry-overlay { left: 16px; right: 16px; width: auto; }
+  .entry-title i { width: 42px; height: 42px; flex-basis: 42px; font-size: 23px; }
+}
+@media (max-width: 520px) {
+  .hud-brand i { display: none; }
+  .hud-brand { gap: 0; }
+  .hud-actions [data-action="roll"] { min-height: 52px; }
+  .camera-buttons button:first-child,
+  .camera-buttons button:nth-child(2) { font-size: 12px; }
+  .history-controls button { font-size: 0; width: 40px; }
+  .history-controls button:first-child::after { content: "‹"; font-size: 22px; }
+  .history-controls button:last-child::after { content: "›"; font-size: 22px; }
+  .entry-title { left: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .turn-pulse { animation: none; }
+}
+
+/* Pregame table and seat setup. */
+.entry-table #scene-host {
+  transform: scale(1.035);
+  filter: blur(3px) saturate(0.88) brightness(0.74);
+  pointer-events: none;
+}
+.entry-table::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 42% 48%, transparent 15%, rgba(3, 28, 44, 0.15) 64%),
+    linear-gradient(90deg, rgba(3, 28, 44, 0.14), transparent 45%, rgba(3, 24, 39, 0.32));
+}
+.entry-overlay {
+  width: min(520px, calc(100vw - 32px));
+}
+.entry-overlay:has(.lobby) {
+  right: 3vw;
+  width: min(780px, calc(100vw - 32px));
+}
+.entry-overlay .setup-card {
+  max-height: calc(100dvh - 140px);
+  overflow: auto;
+  padding: 22px;
+}
+.setup-step {
+  margin-bottom: 8px;
+  color: #ffe58b;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.choice-grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 7px;
+}
+.bank-choices {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.pawn-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.choice-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 68px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 5px;
+  border-color: rgba(208, 242, 239, 0.2);
+  border-radius: 10px;
+  background: rgba(4, 31, 48, 0.56);
+  color: #eaf8f6;
+}
+.choice-card i {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  background: var(--choice, rgba(220, 250, 240, 0.12));
+  color: white;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 20, 30, 0.5);
+}
+.pawn-choices .choice-card i {
+  color: #fff0a6;
+  background: linear-gradient(145deg, rgba(255, 232, 141, 0.17), rgba(126, 226, 206, 0.08));
+}
+.choice-card span {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.choice-card small {
+  position: absolute;
+  inset: auto 3px 2px;
+  color: #f4b1a6;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.choice-card.chosen {
+  border-color: #ffe074;
+  background: linear-gradient(145deg, rgba(255, 224, 116, 0.2), rgba(96, 214, 192, 0.14));
+  box-shadow: inset 0 0 0 1px rgba(255, 224, 116, 0.28), 0 0 18px rgba(255, 224, 116, 0.08);
+}
+.choice-card.chosen::after {
+  content: "✓";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  color: #ffe074;
+  font-size: 12px;
+  font-weight: 900;
+}
+.pawnchip {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border: 1px solid rgba(255, 232, 151, 0.4);
+  border-radius: 10px;
+  background: rgba(255, 224, 116, 0.11);
+  color: #fff0a6;
+  font-size: 20px;
+  line-height: 1;
+}
+.entry-overlay .lobby {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(245px, 0.7fr);
+  gap: 12px;
+  align-items: start;
+}
+.entry-overlay .lobby > .card {
+  margin-bottom: 0;
+}
+.lobby-main {
+  max-height: calc(100dvh - 130px);
+  overflow: auto;
+}
+.lobby-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 9px;
+}
+.lobby-heading h2 {
+  margin: 0;
+}
+.lobby-heading span {
+  color: #b7d9d7;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.seat-list {
+  margin: 10px 0 14px;
+  border-block: 1px solid rgba(215, 247, 239, 0.12);
+}
+.playerline.is-ready {
+  background: linear-gradient(90deg, rgba(103, 220, 166, 0.09), transparent);
+}
+.choice-section > label {
+  margin-top: 14px;
+  color: #dcecea;
+  font-weight: 750;
+}
+.auto-start {
+  border-color: rgba(255, 224, 116, 0.24);
+  background: rgba(255, 224, 116, 0.08);
+  color: #dcecea;
+}
+.ready-button {
+  min-height: 52px;
+  font-size: 16px;
+}
+@media (max-width: 1250px) {
+  .entry-overlay:has(.lobby) {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+  }
+  .entry-table:has(.lobby) .entry-slogan {
+    display: none;
+  }
+}
+@media (max-width: 850px) {
+  .entry-overlay,
+  .entry-overlay:has(.lobby) {
+    top: 76px;
+    bottom: 12px;
+    left: 16px;
+    right: auto;
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: none;
+  }
+  .entry-title {
+    top: 14px;
+  }
+  .entry-title span {
+    display: none;
+  }
+  .entry-overlay .lobby {
+    display: block;
+  }
+  .entry-overlay .lobby > .card {
+    margin-bottom: 12px;
+  }
+  .lobby-main,
+  .entry-overlay .setup-card {
+    max-height: none;
+  }
+}
+@media (max-width: 520px) {
+  .bank-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .choice-card {
+    min-height: 64px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .entry-table #scene-host {
+    transform: scale(1.035);
+  }
+}
+
+/* Chronicle is printed on the felt like the KENTOPOLY wordmark. */
+.board-chronicle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff1a7;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: 0.09em;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 rgba(3, 74, 63, 0.58), 0 4px 13px rgba(0, 49, 46, 0.42);
+}
+.board-chronicle p,
+.board-chronicle p:last-child {
+  margin: 0 0 8px;
+  color: #fff1a7;
+  font-weight: 900;
+  -webkit-line-clamp: 2;
+}
+.board-chronicle p:not(:last-child) {
+  color: rgba(239, 244, 211, 0.82);
+  font-size: 0.9em;
+}
+@media (max-width: 850px) {
+  .board-chronicle {
+    font-size: 11px;
+    letter-spacing: 0.055em;
+  }
+}
+
+/* Cinematic dice readout; the physical dice themselves are rendered in WebGL. */
+.dice-result {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, 10px) scale(0.96);
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-width: 190px;
+  pointer-events: none;
+  opacity: 0;
+  color: #fff7d2;
+  text-align: center;
+  text-shadow: 0 2px 10px #032a34;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.dice-result.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+.dice-in-flight .hud-actions {
+  pointer-events: none;
+}
+.dice-in-flight .board-chronicle,
+.dice-in-flight .pawn-caption {
+  opacity: 0 !important;
+}
+.dice-result > span {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: 3px;
+  color: #ffe074;
+}
+.dice-result > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 3px 16px 5px;
+  border-top: 1px solid rgba(255, 232, 137, 0.68);
+  border-bottom: 1px solid rgba(255, 232, 137, 0.35);
+  background: linear-gradient(90deg, transparent, rgba(5, 44, 54, 0.78) 22%, rgba(5, 44, 54, 0.78) 78%, transparent);
+}
+.dice-result b {
+  min-width: 27px;
+  font: 900 35px/1 Georgia, serif;
+  color: #fff9df;
+}
+.dice-result i {
+  font: 800 22px/1 "Trebuchet MS", sans-serif;
+  color: #9fded5;
+}
+.dice-result .dice-total {
+  color: #ffe074;
+  font-size: 43px;
+}
+.dice-result.is-sum > div {
+  animation: dice-sum-pop 0.3s ease-out both;
+}
+@keyframes dice-sum-pop {
+  from { transform: scale(0.9); filter: brightness(1.6); }
+  to { transform: scale(1); filter: brightness(1); }
+}
+@media (max-width: 850px) {
+  .dice-result {
+    top: 47%;
+    min-width: 160px;
+  }
+  .dice-result b { font-size: 30px; }
+  .dice-result .dice-total { font-size: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dice-result { transition: none; }
+}
+</style></head><body><div id="app"></div><div id="modal-root"></div><noscript>Для игры включи JavaScript в браузере.</noscript><script>window.KENTOPOLY_STANDALONE=true;(()=>{
+const BANKS = [
+  { id: "sber", name: "Сбер", mark: "С", color: "#218344" },
+  { id: "tbank", name: "Т-Банк", mark: "Т", color: "#d3a800" },
+  { id: "alfa", name: "Альфа-Банк", mark: "А", color: "#dc3939" },
+  { id: "vtb", name: "ВТБ", mark: "В", color: "#2484cb" },
+  { id: "psb", name: "ПСБ", mark: "П", color: "#dc711f" },
+  { id: "gpb", name: "Газпромбанк", mark: "Г", color: "#303b78" },
+  { id: "sov", name: "Совкомбанк", mark: "СК", color: "#7066a5" },
+  { id: "raif", name: "Райффайзен", mark: "Р", color: "#777020" },
+];
+const PAWNS = [
+  { id: "classic", name: "Классик", mark: "♟" },
+  { id: "tower", name: "Башня", mark: "♜" },
+  { id: "rocket", name: "Ракета", mark: "▲" },
+  { id: "gem", name: "Кристалл", mark: "◆" },
+  { id: "tycoon", name: "Магнат", mark: "●" },
+  { id: "crown", name: "Корона", mark: "♛" },
+];
+const GROUPS = [
+  {
+    id: "H1",
+    name: "Первый ключ",
+    color: "#ff7753",
+    brands: ["Однушка в Бокситогорске", "Двушка в Братске"],
+  },
+  {
+    id: "H2",
+    name: "Сибирский апгрейд",
+    color: "#ffc02f",
+    brands: ["Трёшка в Иркутске", "Квартира в Красноярске"],
+  },
+  {
+    id: "H3",
+    name: "Большой город",
+    color: "#ff518b",
+    brands: ["Квартира в Петербурге", "Апартаменты в Москве"],
+  },
+  {
+    id: "M1",
+    name: "Каждый день",
+    color: "#ae5cff",
+    brands: [
+      "Fix Price",
+      "Gloria Jeans",
+      "O’STIN",
+      "Zarina",
+      "Befree",
+      "Love Republic",
+      "Sela",
+      "Lime",
+      "Familia",
+      "Kari",
+    ],
+  },
+  {
+    id: "M2",
+    name: "Фудкорт",
+    color: "#4479ff",
+    brands: [
+      "ROSTIC’S",
+      "Бургер Кинг",
+      "Вкусно — и точка",
+      "Додо Пицца",
+      "Теремок",
+      "Шоколадница",
+      "Крошка Картошка",
+      "Кофе Хауз",
+      "Surf Coffee",
+      "Суши Wok",
+    ],
+  },
+  {
+    id: "M3",
+    name: "Большая покупка",
+    color: "#25bfe8",
+    brands: [
+      "Спортмастер",
+      "М.Видео",
+      "DNS",
+      "Эльдорадо",
+      "Л’Этуаль",
+      "Рив Гош",
+      "Золотое Яблоко",
+      "Hoff",
+      "Askona",
+      "Орматек",
+    ],
+  },
+  {
+    id: "S1",
+    name: "Найти и договориться",
+    color: "#00c59f",
+    brands: [
+      "2ГИС",
+      "Авито",
+      "Циан",
+      "Домклик",
+      "Профи.ру",
+      "YouDo",
+      "Суточно.ру",
+      "Яндекс Путешествия",
+      "Туту",
+      "Островок",
+    ],
+  },
+  {
+    id: "S2",
+    name: "Доставка",
+    color: "#42cc62",
+    brands: [
+      "СДЭК",
+      "Яндекс Доставка",
+      "ПЭК",
+      "Деловые Линии",
+      "Boxberry",
+      "DPD",
+      "Почта России",
+      "Курьер Сервис Экспресс",
+      "Байкал Сервис",
+      "Энергия",
+    ],
+  },
+  {
+    id: "S3",
+    name: "Онлайн-торговля",
+    color: "#a8cc20",
+    brands: [
+      "Ozon",
+      "Wildberries",
+      "Яндекс Маркет",
+      "Мегамаркет",
+      "Магнит Маркет",
+      "Lamoda",
+      "ВсеИнструменты.ру",
+      "Петрович",
+      "Онлайн Трейд",
+      "Ситилинк",
+    ],
+  },
+  {
+    id: "C1",
+    name: "Медиа",
+    color: "#e747bf",
+    brands: [
+      "Netflix",
+      "Disney",
+      "Warner Bros. Discovery",
+      "Sony Pictures",
+      "Paramount",
+      "Universal Pictures",
+      "Spotify",
+      "Tencent",
+      "ByteDance",
+      "Amazon MGM Studios",
+    ],
+  },
+  {
+    id: "C2",
+    name: "Авто",
+    color: "#ff9635",
+    brands: [
+      "BMW",
+      "Mercedes-Benz",
+      "Toyota",
+      "Porsche",
+      "Ferrari",
+      "Lamborghini",
+      "Audi",
+      "Lexus",
+      "Tesla",
+      "BYD",
+    ],
+  },
+  {
+    id: "C3",
+    name: "Технологии",
+    color: "#4375fa",
+    brands: [
+      "NVIDIA",
+      "Apple",
+      "Microsoft",
+      "Samsung",
+      "Intel",
+      "AMD",
+      "TSMC",
+      "Qualcomm",
+      "ASML",
+      "IBM",
+    ],
+  },
+];
+const DISTRICTS = ["Жилой фонд", "Торговый центр", "Город сервисов", "Мировые корпорации"];
+const PRICES = [
+  [60, 80, 100, 120, 140, 160],
+  [180, 200, 220, 240, 260, 280],
+  [300, 320, 340, 360, 380, 400],
+  [420, 460, 500, 540, 580, 620],
+];
+const CHANCE = [
+  { name: "Кенты скинулись", cash: 100000 },
+  { name: "Кешбэк пришёл", cash: 50000 },
+  { name: "Продал старый ПК", cash: 150000 },
+  { name: "Забыл отменить подписки", cash: -50000 },
+  { name: "Спонтанная поездка", cash: -75000 },
+  { name: "Ремонт машины", cash: -100000 },
+  { name: "Домой, на Старт", move: 0 },
+  { name: "Найди место получше", move: 30 },
+  { name: "Неудачный день", jail: true },
+  { name: "Спор не задался", jail: true },
+  { name: "Пропуск на свободу", release: true },
+  { name: "Плановый ремонт", repair: true },
+];
+const RISK = [
+  { name: "Маленький удачный риск", cash: 50000 },
+  { name: "Сделка выстрелила", cash: 100000 },
+  { name: "Большой контракт", cash: 200000 },
+  { name: "Джекпот кентов", cash: 350000 },
+  { name: "Мелкий просчёт", cash: -50000 },
+  { name: "Неожиданные расходы", cash: -100000 },
+  { name: "Срыв сделки", cash: -200000 },
+  { name: "Крупный провал", cash: -350000 },
+];
+
+
+const VERSION = "0.3.0-alpha";
+const money = (n) => "$" + Math.round(n).toLocaleString("ru-RU");
+const ok = (v, msg) => {
+  if (!v) throw Error(msg);
+};
+const shuffle = (a, r) => {
+  a = [...a];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = r(i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+function seeded(seed) {
+  let x = seed >>> 0;
+  return (n) => {
+    x = (Math.imul(x, 1664525) + 1013904223) >>> 0;
+    return Math.floor((x / 4294967296) * n);
+  };
+}
+const player = (s, id) => s.players.find((p) => p.id === id);
+const active = (s) => player(s, s.active);
+const assets = (s, id) => s.tiles.filter((t) => t.owner === id);
+const fountains = (s, id) => assets(s, id).filter((t) => t.type === "fountain").length;
+const monopolies = (s, id) =>
+  GROUPS.filter(
+    (g) =>
+      s.tiles.filter((t) => t.group === g.id).length === 2 &&
+      s.tiles.filter((t) => t.group === g.id).every((t) => t.owner === id),
+  ).map((g) => g.id);
+function fee(s, t) {
+  if (!t.owner) return 0;
+  if (t.type === "fountain") return [0, 20000, 50000, 100000, 0][fountains(s, t.owner)];
+  return (
+    Math.ceil(
+      (t.base *
+        [1, 1.75, 2.75, 4][t.level] *
+        (monopolies(s, t.owner).includes(t.group) ? 1.5 : 1) *
+        (s.award === t.id ? 2 : 1)) /
+        1000,
+    ) * 1000
+  );
+}
+const buyout = (t) => 2 * (t.price + (t.level * t.price) / 2);
+const liquidation = (t) => t.price / 2 + (t.level * t.price) / 4;
+function available(s, id) {
+  const p = player(s, id);
+  let held = 0;
+  if (s.phase.type === "auction") held = s.bids?.[id] || 0;
+  for (const o of s.rescue?.offers || []) if (o.bidder === id) held += o.cash;
+  return p.cash - held;
+}
+function board(seed) {
+  const r = seeded(seed);
+  const tiles = Array.from({ length: 40 }, (_, id) => ({
+    id,
+    type: "rest",
+    name: "Передышка",
+    owner: null,
+    level: 0,
+    price: 0,
+    base: 0,
+    district: Math.floor(id / 10),
+  }));
+  for (let d = 0; d < 4; d++)
+    for (let g = 0; g < 3; g++) {
+      const def = GROUPS[d * 3 + g],
+        names = d ? shuffle(def.brands, r).slice(0, 2) : def.brands;
+      for (let k = 0; k < 2; k++) {
+        const ix = g * 2 + k,
+          id = d * 10 + [1, 2, 4, 6, 8, 9][ix];
+        Object.assign(tiles[id], {
+          type: "property",
+          name: names[k],
+          group: def.id,
+          color: def.color,
+          price: PRICES[d][ix] * 1000,
+          base: PRICES[d][ix] * 100,
+        });
+      }
+    }
+  for (const [id, type, name] of [
+    [0, "start", "Начало"],
+    [10, "jail", "Тюрьма"],
+    [20, "award", "2026 Awards"],
+    [30, "search", "Поиск"],
+    [13, "chance", "Chance"],
+    [23, "chance", "Chance"],
+    [33, "chance", "Chance"],
+    [37, "risk", "Risk"],
+  ])
+    Object.assign(tiles[id], { type, name });
+  for (let d = 0; d < 4; d++) {
+    Object.assign(tiles[d * 10 + 5], {
+      type: "fountain",
+      name: ["У подъезда", "В атриуме", "У бизнес-центра", "Площадь капитала"][d],
+      price: 200000,
+    });
+    if (d < 3)
+      Object.assign(tiles[d * 10 + 7], {
+        type: "tax",
+        name: ["Коммуналка", "Сбор ТЦ", "Городской сбор"][d],
+        tax: [30000, 50000, 75000][d],
+      });
+  }
+  return tiles;
+}
+function migrateTableLayout(s) {
+  const layoutVersion = Number(s.layoutVersion) || 0;
+  if (!Number.isSafeInteger(s.rollSeq) || s.rollSeq < 0) s.rollSeq = 0;
+  if (!("lastRoll" in s)) s.lastRoll = null;
+  if (layoutVersion >= 4) return s;
+  if (layoutVersion < 3) {
+    if (s.tiles?.[20]?.type === "search" && s.tiles?.[30]?.type === "award") {
+      Object.assign(s.tiles[20], { type: "award", name: "2026 Awards" });
+      Object.assign(s.tiles[30], { type: "search", name: "Поиск" });
+      for (const p of s.players) p.pos = p.pos === 20 ? 30 : p.pos === 30 ? 20 : p.pos;
+      s.motions = [];
+    }
+    for (const t of s.tiles || []) {
+      const g = GROUPS.find((g) => g.id === t.group);
+      if (g) t.color = g.color;
+    }
+  }
+  const usedPawns = new Set();
+  for (const p of s.players || []) {
+    if (!PAWNS.some((pawn) => pawn.id === p.pawn) || usedPawns.has(p.pawn))
+      p.pawn = PAWNS.find((pawn) => !usedPawns.has(pawn.id))?.id || PAWNS[0].id;
+    usedPawns.add(p.pawn);
+  }
+  s.layoutVersion = 4;
+  return s;
+}
+function createGame(id, seed = 1234) {
+  return {
+    id,
+    seed,
+    version: 0,
+    layoutVersion: 4,
+    status: "lobby",
+    players: [],
+    host: null,
+    tiles: board(seed),
+    active: null,
+    phase: { type: "lobby", until: 0 },
+    award: null,
+    log: [],
+    turn: 0,
+    doubles: 0,
+    rollSeq: 0,
+    lastRoll: null,
+    extra: false,
+    searchUsed: false,
+    upgradeUsed: false,
+    takeoverUsed: false,
+    bids: {},
+    trade: null,
+    rescue: null,
+    chance: [],
+    risk: [],
+    chanceDiscard: [],
+    riskDiscard: [],
+    winners: [],
+  };
+}
+function addPlayer(s, id, name, bank, pawn) {
+  ok(s.status === "lobby", "Партия уже началась");
+  ok(s.players.length < 6, "Все шесть мест заняты");
+  name = String(name || "").trim();
+  ok(name.length >= 1 && name.length <= 24, "Ник: от 1 до 24 символов");
+  ok(
+    BANKS.some((b) => b.id === bank),
+    "Выберите банк",
+  );
+  ok(!s.players.some((p) => p.bank === bank), "Этот банк уже занят");
+  pawn ||= PAWNS.find((x) => !s.players.some((p) => p.pawn === x.id))?.id;
+  ok(PAWNS.some((x) => x.id === pawn), "Выберите фигурку");
+  ok(!s.players.some((p) => p.pawn === pawn), "Эта фигурка уже занята");
+  ok(!s.players.some((p) => p.id === id), "Место уже существует");
+  s.players.push({
+    id,
+    name,
+    bank,
+    pawn,
+    cash: 1000000,
+    pos: 0,
+    ready: false,
+    out: false,
+    jail: false,
+    attempts: 0,
+    release: false,
+    loan: null,
+    ownTurn: 0,
+  });
+  if (!s.host) s.host = id;
+  s.version++;
+  return s;
+}
+function log(s, text) {
+  s.log.push({ n: (s.log.at(-1)?.n || 0) + 1, text });
+  s.log = s.log.slice(-180);
+}
+function setPhase(s, type, data = {}, now = Date.now()) {
+  s.phase = {
+    type,
+    ...data,
+    until:
+      now +
+      ({
+        roll: 30,
+        jail: 30,
+        purchase: 30,
+        auction: 30,
+        search: 20,
+        award: 20,
+        takeover: 20,
+        manage: 45,
+        debt: 120,
+      }[type] || 30) *
+        1000,
+  };
+}
+function transfer(s, from, to, amount) {
+  ok(Number.isSafeInteger(amount) && amount >= 0, "Некорректная сумма");
+  const p = player(s, from);
+  ok(p.cash >= amount, "Недостаточно денег");
+  p.cash -= amount;
+  if (to && player(s, to) && !player(s, to).out) player(s, to).cash += amount;
+}
+function win(s) {
+  if (s.status !== "playing" || s.phase.type === "debt") return false;
+  const live = s.players.filter((p) => !p.out);
+  const wins = live.filter(
+    (p) => fountains(s, p.id) === 4 || monopolies(s, p.id).length >= 4 || live.length === 1,
+  );
+  if (wins.length || !live.length) {
+    s.status = "finished";
+    s.winners = wins.map((p) => ({
+      id: p.id,
+      reasons: [
+        ...(fountains(s, p.id) === 4 ? ["Четыре фонтана"] : []),
+        ...(monopolies(s, p.id).length >= 4 ? ["Четыре монополии"] : []),
+        ...(live.length === 1 ? ["Последний игрок"] : []),
+      ],
+    }));
+    s.phase = { type: "finished", until: 0 };
+    s.trade = null;
+    s.rescue = null;
+    s.bids = {};
+    log(s, wins.length ? "Победа: " + wins.map((p) => p.name).join(" и ") : "Партия завершена");
+    return true;
+  }
+  return false;
+}
+function finishVisit(s, now) {
+  if (win(s)) return;
+  if (s.extra && !active(s).jail) {
+    s.extra = false;
+    setPhase(s, "roll", {}, now);
+  } else setPhase(s, "manage", {}, now);
+}
+function readyTurn(s, now) {
+  const p = active(s);
+  if (p.jail) setPhase(s, "jail", {}, now);
+  else setPhase(s, "roll", {}, now);
+}
+function beginTurn(s, now) {
+  s.turn++;
+  s.doubles = 0;
+  s.extra = false;
+  s.searchUsed = false;
+  s.upgradeUsed = false;
+  s.takeoverUsed = false;
+  s.trade = null;
+  s.rescue = null;
+  const p = active(s);
+  p.ownTurn++;
+  log(s, "Ход " + s.turn + " · " + p.name);
+  if (p.loan && p.ownTurn >= p.loan.due) charge(s, p.loan.total, "CB", { type: "turnReady" }, now);
+  else readyTurn(s, now);
+}
+function nextTurn(s, now) {
+  if (win(s)) return;
+  let i = s.players.findIndex((p) => p.id === s.active);
+  do {
+    i = (i + 1) % s.players.length;
+  } while (s.players[i].out);
+  s.active = s.players[i].id;
+  beginTurn(s, now);
+}
+function after(s, a, now, r) {
+  if (a.type === "takeover") {
+    const t = s.tiles[a.tile];
+    if (t.owner && t.owner !== s.active && !s.takeoverUsed) {
+      setPhase(s, "takeover", { tile: t.id }, now);
+      return;
+    }
+    finishVisit(s, now);
+  } else if (a.type === "turnReady") readyTurn(s, now);
+  else if (a.type === "jailRoll") {
+    active(s).jail = false;
+    active(s).attempts = 0;
+    setPhase(s, "roll", {}, now);
+  } else if (a.type === "jailMove") {
+    active(s).jail = false;
+    active(s).attempts = 0;
+    move(s, a.distance, now, r);
+  } else finishVisit(s, now);
+}
+function payDebt(s) {
+  const d = s.phase,
+    p = active(s);
+  transfer(s, p.id, d.creditor === "CB" ? null : d.creditor, d.amount);
+  if (d.creditor === "CB") p.loan = null;
+  log(s, p.name + " оплатил " + money(d.amount) + (d.creditor === "CB" ? " · кредит ЦБ" : ""));
+  s.rescue = null;
+  return d.after;
+}
+function settle(s, now, r) {
+  if (s.phase.type === "debt" && active(s).cash >= s.phase.amount) {
+    const a = payDebt(s);
+    setPhase(s, "settled", {}, now);
+    if (!win(s)) after(s, a, now, r);
+  }
+}
+function charge(s, amount, creditor, a, now, r) {
+  const p = active(s);
+  if (p.cash >= amount) {
+    transfer(s, p.id, creditor === "CB" ? null : creditor, amount);
+    if (creditor === "CB") p.loan = null;
+    if (amount)
+      log(
+        s,
+        p.name +
+          " → " +
+          (creditor === "CB" ? "ЦБ" : creditor ? player(s, creditor)?.name : "банк игры") +
+          ": " +
+          money(amount),
+      );
+    after(s, a, now, r);
+  } else {
+    setPhase(s, "debt", { amount, creditor, after: a }, now);
+    s.trade = null;
+    s.rescue = null;
+    log(s, "Нужен план спасения: " + p.name + ", не хватает " + money(amount - p.cash));
+  }
+}
+function recordMotion(s, playerId, from, to, kind, steps = 0) {
+  if (!s.motions) s.motions = [];
+  const seq = (s.motions.at(-1)?.seq || 0) + 1;
+  s.motions.push({ seq, playerId, from, to, kind, steps });
+  s.motions = s.motions.slice(-16);
+}
+function recordRoll(s, playerId, dice) {
+  const seq = (s.rollSeq || 0) + 1;
+  s.rollSeq = seq;
+  s.dice = [...dice];
+  s.lastRoll = { seq, playerId, dice: [...dice], total: dice[0] + dice[1] };
+}
+function goJail(s, now) {
+  const p = active(s);
+  recordMotion(s, p.id, p.pos, 10, "jail");
+  p.pos = 10;
+  p.jail = true;
+  p.attempts = 0;
+  s.extra = false;
+  log(s, p.name + " отправляется в Тюрьму");
+  nextTurn(s, now);
+}
+function draw(s, kind, now, r) {
+  const deck = kind === "chance" ? CHANCE : RISK;
+  if (!s[kind].length) {
+    s[kind] = shuffle(s[kind + "Discard"], r);
+    s[kind + "Discard"] = [];
+  }
+  ok(s[kind].length, "Колода пуста");
+  const ix = s[kind].pop(),
+    c = deck[ix];
+  log(s, (kind === "chance" ? "Chance" : "Risk") + " · " + c.name);
+  if (!c.release) s[kind + "Discard"].push(ix);
+  if (c.jail) {
+    goJail(s, now);
+    return;
+  }
+  if (c.release) {
+    active(s).release = true;
+    finishVisit(s, now);
+    return;
+  }
+  if (c.move !== undefined) {
+    move(s, (c.move - active(s).pos + 40) % 40, now, r);
+    return;
+  }
+  const cash = c.repair ? -assets(s, s.active).reduce((a, t) => a + t.level * 20000, 0) : c.cash;
+  if (cash < 0) charge(s, -cash, null, { type: "visit" }, now, r);
+  else {
+    active(s).cash += cash || 0;
+    log(s, "Банк игры → " + active(s).name + ": " + money(cash || 0));
+    finishVisit(s, now);
+  }
+}
+function land(s, now, r) {
+  const t = s.tiles[active(s).pos];
+  if (t.type === "property" || t.type === "fountain") {
+    if (!t.owner) setPhase(s, "purchase", { tile: t.id }, now);
+    else if (t.owner !== s.active)
+      charge(
+        s,
+        fee(s, t),
+        t.owner,
+        { type: t.type === "property" ? "takeover" : "visit", tile: t.id },
+        now,
+        r,
+      );
+    else finishVisit(s, now);
+  } else if (t.type === "tax") charge(s, t.tax, null, { type: "visit" }, now, r);
+  else if (t.type === "search" && !s.searchUsed) {
+    s.searchUsed = true;
+    setPhase(s, "search", {}, now);
+  } else if (t.type === "award" && assets(s, s.active).some((t) => t.type === "property"))
+    setPhase(s, "award", {}, now);
+  else if (t.type === "chance" || t.type === "risk") draw(s, t.type, now, r);
+  else finishVisit(s, now);
+}
+function move(s, n, now, r) {
+  const p = active(s);
+  recordMotion(s, p.id, p.pos, (p.pos + n) % 40, "walk", n);
+  if (p.pos + n >= 40) {
+    p.cash += 150000;
+    log(s, p.name + " прошёл Старт: +$150 000");
+  }
+  p.pos = (p.pos + n) % 40;
+  log(s, p.name + " → " + s.tiles[p.pos].name);
+  land(s, now, r);
+}
+function bankSell(s, t, levelsOnly = false) {
+  const p = player(s, t.owner);
+  ok(p, "Актив свободен");
+  if (levelsOnly) {
+    ok(t.level > 0, "Нет уровней");
+    t.level--;
+    p.cash += t.price / 4;
+    log(s, p.name + " продал уровень · " + t.name);
+  } else {
+    p.cash += liquidation(t);
+    log(s, p.name + " продал банку · " + t.name + " · " + money(liquidation(t)));
+    if (s.award === t.id) s.award = null;
+    t.owner = null;
+    t.level = 0;
+  }
+}
+function bankrupt(s, now) {
+  const p = active(s),
+    creditor = s.phase.type === "debt" ? s.phase.creditor : null;
+  const own = assets(s, p.id);
+  if (p.loan) {
+    for (const t of own) bankSell(s, t);
+    const cb = Math.min(p.cash, p.loan.total);
+    p.cash -= cb;
+    p.loan = null;
+    if (creditor && creditor !== "CB")
+      transfer(s, p.id, creditor, Math.min(p.cash, s.phase.amount || 0));
+    p.cash = 0;
+  } else if (creditor && creditor !== "CB" && player(s, creditor) && !player(s, creditor).out) {
+    transfer(s, p.id, creditor, p.cash);
+    for (const t of own) t.owner = creditor;
+  } else {
+    p.cash = 0;
+    for (const t of own) {
+      if (s.award === t.id) s.award = null;
+      t.owner = null;
+      t.level = 0;
+    }
+  }
+  if (p.release) {
+    s.chanceDiscard.push(10);
+    p.release = false;
+  }
+  p.out = true;
+  s.trade = null;
+  s.rescue = null;
+  s.bids = {};
+  log(s, p.name + " выбыл из партии");
+  setPhase(s, "settled", {}, now);
+  if (!win(s)) nextTurn(s, now);
+}
+function auctionEnd(s, now) {
+  const t = s.tiles[s.phase.tile];
+  const order = [
+    ...s.players.slice(s.players.findIndex((p) => p.id === s.active)),
+    ...s.players.slice(
+      0,
+      s.players.findIndex((p) => p.id === s.active),
+    ),
+  ];
+  const bidders = order
+    .filter((p) => !p.out && (s.bids[p.id] || 0) > 0)
+    .sort((a, b) => s.bids[b.id] - s.bids[a.id]);
+  if (bidders.length) {
+    const p = bidders[0],
+      amount = s.bids[p.id];
+    transfer(s, p.id, null, amount);
+    t.owner = p.id;
+    log(s, p.name + " выиграл аукцион " + t.name + " за " + money(amount));
+  } else log(s, "Нет ставок · " + t.name);
+  s.bids = {};
+  finishVisit(s, now);
+}
+function validateAssets(s, ids, owner) {
+  ok(
+    Array.isArray(ids) && ids.length <= 28 && new Set(ids).size === ids.length,
+    "Некорректный список активов",
+  );
+  for (const id of ids)
+    ok(Number.isInteger(id) && s.tiles[id]?.owner === owner, "Владение изменилось");
+}
+function amount(n, allowZero = true) {
+  ok(Number.isSafeInteger(n) && n >= (allowZero ? 0 : 1) && n <= 1000000000, "Некорректная сумма");
+  return n;
+}
+function ownTurn(s, id) {
+  ok(s.active === id, "Сейчас ход другого игрока");
+}
+function inPhase(s, ...types) {
+  ok(types.includes(s.phase.type), "Это действие сейчас недоступно");
+}
+function apply(source, id, cmd, now = Date.now(), r = (n) => Math.floor(Math.random() * n)) {
+  const s = migrateTableLayout(structuredClone(source));
+  const p = player(s, id);
+  ok(p, "Место не найдено");
+  ok(!p.out, "Вы уже выбыли");
+  ok(cmd && typeof cmd.type === "string", "Нет команды");
+  const c = cmd;
+  if (s.status === "lobby") {
+    if (c.type === "ready") {
+      p.ready = !p.ready;
+      if (p.ready && s.players.length >= 2 && s.players.every((q) => q.ready)) {
+        s.status = "playing";
+        s.players = shuffle(s.players, r);
+        s.active = s.players[0].id;
+        s.chance = shuffle(
+          CHANCE.map((_, i) => i),
+          r,
+        );
+        s.risk = shuffle(
+          RISK.map((_, i) => i),
+          r,
+        );
+        log(s, "Kentopoly · новая партия");
+        beginTurn(s, now);
+      }
+    }
+    else if (c.type === "bank") {
+      ok(
+        BANKS.some((b) => b.id === c.bank) &&
+          !s.players.some((q) => q.id !== id && q.bank === c.bank),
+        "Банк занят",
+      );
+      p.bank = c.bank;
+      p.ready = false;
+    } else if (c.type === "pawn") {
+      ok(
+        PAWNS.some((x) => x.id === c.pawn) &&
+          !s.players.some((q) => q.id !== id && q.pawn === c.pawn),
+        "Фигурка занята",
+      );
+      p.pawn = c.pawn;
+      p.ready = false;
+    } else if (c.type === "start") {
+      ok(s.host === id, "Только создатель начинает игру");
+      ok(
+        s.players.length >= 2 && s.players.every((q) => q.ready),
+        "Нужно минимум двое готовых игроков",
+      );
+      s.status = "playing";
+      s.players = shuffle(s.players, r);
+      s.active = s.players[0].id;
+      s.chance = shuffle(
+        CHANCE.map((_, i) => i),
+        r,
+      );
+      s.risk = shuffle(
+        RISK.map((_, i) => i),
+        r,
+      );
+      log(s, "Kentopoly · новая партия");
+      beginTurn(s, now);
+    } else throw Error("Сначала начните игру");
+    s.version++;
+    return s;
+  }
+  ok(s.status === "playing", "Партия завершена");
+  if (c.type === "bid") {
+    inPhase(s, "auction");
+    ok(!(id in s.bids), "Ставка уже принята");
+    const a = amount(c.amount);
+    ok(a === 0 || a >= s.tiles[s.phase.tile].price / 2, "Ставка ниже половины цены");
+    ok(a % 1000 === 0 && a <= p.cash, "Неверная ставка");
+    s.bids[id] = a;
+    if (s.players.filter((q) => !q.out).every((q) => q.id in s.bids)) auctionEnd(s, now);
+  } else if (c.type === "rescueOffer") {
+    inPhase(s, "debt");
+    ok(id !== s.active && s.rescue, "Нет открытого лота");
+    const a = amount(c.cash, false);
+    ok(a <= p.cash, "Недостаточно денег");
+    const give = c.give || [];
+    validateAssets(s, give, id);
+    s.rescue.offers = s.rescue.offers.filter((o) => o.bidder !== id);
+    s.rescue.offers.push({
+      bidder: id,
+      cash: a,
+      give,
+      until: Math.min(now + 30000, s.phase.until),
+      lot: [...s.rescue.ids],
+    });
+  } else if (c.type === "withdrawOffer") {
+    inPhase(s, "debt");
+    ok(s.rescue, "Нет предложений");
+    s.rescue.offers = s.rescue.offers.filter((o) => o.bidder !== id);
+  } else if (c.type === "acceptTrade" || c.type === "rejectTrade") {
+    inPhase(s, "manage");
+    const o = s.trade;
+    ok(o && o.to === id && o.until >= now, "Нет актуального предложения");
+    if (c.type === "acceptTrade") {
+      validateAssets(s, o.give, o.from);
+      validateAssets(s, o.take, o.to);
+      const a = player(s, o.from);
+      ok(a.cash >= o.pay && p.cash >= o.receive, "Баланс изменился");
+      a.cash += o.receive - o.pay;
+      p.cash += o.pay - o.receive;
+      for (const t of o.give) s.tiles[t].owner = id;
+      for (const t of o.take) s.tiles[t].owner = a.id;
+      log(s, "Обмен: " + a.name + " ↔ " + p.name);
+    }
+    s.trade = null;
+    win(s);
+  } else {
+    ownTurn(s, id);
+    switch (c.type) {
+      case "roll": {
+        inPhase(s, "roll");
+        const d = [r(6) + 1, r(6) + 1];
+        recordRoll(s, p.id, d);
+        log(s, p.name + " бросает " + d[0] + " + " + d[1]);
+        if (d[0] === d[1]) s.doubles++;
+        else s.doubles = 0;
+        if (s.doubles === 3) goJail(s, now);
+        else {
+          s.extra = d[0] === d[1];
+          move(s, d[0] + d[1], now, r);
+        }
+        break;
+      }
+      case "jail": {
+        inPhase(s, "jail");
+        if (c.choice === "pay") charge(s, 50000, null, { type: "jailRoll" }, now, r);
+        else if (c.choice === "card") {
+          ok(p.release, "Нет карты");
+          p.release = false;
+          s.chanceDiscard.push(10);
+          p.jail = false;
+          p.attempts = 0;
+          setPhase(s, "roll", {}, now);
+        } else {
+          const d = [r(6) + 1, r(6) + 1];
+          recordRoll(s, p.id, d);
+          p.attempts++;
+          s.extra = false;
+          if (d[0] === d[1]) {
+            p.jail = false;
+            p.attempts = 0;
+            move(s, d[0] + d[1], now, r);
+          } else if (p.attempts >= 3)
+            charge(s, 50000, null, { type: "jailMove", distance: d[0] + d[1] }, now, r);
+          else setPhase(s, "manage", {}, now);
+        }
+        break;
+      }
+      case "buy": {
+        inPhase(s, "purchase");
+        const t = s.tiles[s.phase.tile];
+        ok(!t.owner, "Объект занят");
+        transfer(s, id, null, t.price);
+        t.owner = id;
+        log(s, p.name + " купил " + t.name + " · " + money(t.price));
+        finishVisit(s, now);
+        break;
+      }
+      case "auction":
+        inPhase(s, "purchase");
+        s.bids = {};
+        setPhase(s, "auction", { tile: s.phase.tile }, now);
+        log(s, "Открыт аукцион · " + s.tiles[s.phase.tile].name);
+        break;
+      case "search": {
+        inPhase(s, "search");
+        ok(Number.isInteger(c.tile) && c.tile >= 0 && c.tile < 40, "Выберите клетку");
+        recordMotion(s, p.id, p.pos, c.tile, "search");
+        p.pos = c.tile;
+        log(s, "Поиск → " + s.tiles[c.tile].name);
+        if (s.tiles[c.tile].type === "search") finishVisit(s, now);
+        else land(s, now, r);
+        break;
+      }
+      case "award": {
+        inPhase(s, "award");
+        const t = s.tiles[c.tile];
+        ok(t?.owner === id && t.type === "property", "Нужно своё здание");
+        s.award = t.id;
+        log(s, "Единственный Awards → " + t.name + " (" + p.name + ")");
+        finishVisit(s, now);
+        break;
+      }
+      case "takeover": {
+        inPhase(s, "takeover");
+        ok(!s.takeoverUsed, "Лимит выкупа");
+        const t = s.tiles[s.phase.tile];
+        ok(t.type === "property" && t.owner && t.owner !== id, "Нельзя выкупить");
+        transfer(s, id, t.owner, buyout(t));
+        log(s, p.name + " выкупил " + t.name + " · " + money(buyout(t)));
+        t.owner = id;
+        s.takeoverUsed = true;
+        finishVisit(s, now);
+        break;
+      }
+      case "skip":
+        inPhase(s, "search", "award", "takeover");
+        finishVisit(s, now);
+        break;
+      case "upgrade": {
+        inPhase(s, "manage");
+        const t = s.tiles[c.tile];
+        ok(
+          !s.upgradeUsed && t?.owner === id && t.type === "property" && t.level < 3,
+          "Улучшение недоступно",
+        );
+        transfer(s, id, null, t.price / 2);
+        t.level++;
+        s.upgradeUsed = true;
+        s.trade = null;
+        log(s, "Уровень " + t.level + " · " + t.name);
+        break;
+      }
+      case "sell": {
+        inPhase(s, "manage", "debt");
+        const t = s.tiles[c.tile];
+        ok(t?.owner === id, "Это не ваш актив");
+        s.trade = null;
+        if (s.rescue?.ids.includes(t.id)) s.rescue = null;
+        bankSell(s, t, !!c.levelOnly);
+        if (s.phase.type === "debt") settle(s, now, r);
+        else win(s);
+        break;
+      }
+      case "rescueLot":
+        inPhase(s, "debt");
+        validateAssets(s, c.ids, id);
+        ok(c.ids.length, "Выберите имущество");
+        s.rescue = { ids: c.ids, offers: [] };
+        log(s, p.name + " выставил имущество для спасения");
+        break;
+      case "cancelLot":
+        inPhase(s, "debt");
+        s.rescue = null;
+        break;
+      case "acceptRescue": {
+        inPhase(s, "debt");
+        const o = s.rescue?.offers.find((o) => o.bidder === c.bidder && o.until >= now);
+        ok(o, "Предложение истекло");
+        validateAssets(s, o.lot, id);
+        validateAssets(s, o.give, o.bidder);
+        transfer(s, o.bidder, id, o.cash);
+        for (const t of o.lot) s.tiles[t].owner = o.bidder;
+        for (const t of o.give) s.tiles[t].owner = id;
+        log(s, "Спасательная сделка: " + p.name + " получил " + money(o.cash));
+        s.rescue = null;
+        settle(s, now, r);
+        break;
+      }
+      case "loan": {
+        inPhase(s, "debt");
+        ok(!p.loan && s.phase.creditor !== "CB", "Второй кредит и рефинансирование запрещены");
+        const principal = s.phase.amount - p.cash;
+        ok(principal > 0 && principal <= 500000, "Кредит доступен при нехватке до $500 000");
+        const fixedFee = Math.ceil(principal / 10 / 1000) * 1000;
+        ok(
+          c.principal === principal && c.total === principal + fixedFee,
+          "Условия изменились — подтвердите заново",
+        );
+        p.loan = { principal, fee: fixedFee, total: principal + fixedFee, due: p.ownTurn + 5 };
+        p.cash += principal;
+        log(
+          s,
+          "Кредит ЦБ: " +
+            p.name +
+            " · вернуть " +
+            money(p.loan.total) +
+            " в свой ход " +
+            p.loan.due,
+        );
+        settle(s, now, r);
+        break;
+      }
+      case "repay":
+        inPhase(s, "manage");
+        ok(p.loan, "Нет кредита");
+        transfer(s, id, null, p.loan.total);
+        log(s, p.name + " погасил кредит ЦБ");
+        p.loan = null;
+        break;
+      case "trade": {
+        inPhase(s, "manage");
+        ok(!s.trade, "Сначала отмените открытое предложение");
+        const q = player(s, c.to);
+        ok(q && !q.out && q.id !== id, "Нужен другой игрок");
+        validateAssets(s, c.give || [], id);
+        validateAssets(s, c.take || [], q.id);
+        amount(c.pay || 0);
+        amount(c.receive || 0);
+        ok(p.cash >= (c.pay || 0) && q.cash >= (c.receive || 0), "Недостаточно денег");
+        s.trade = {
+          from: id,
+          to: q.id,
+          give: c.give || [],
+          take: c.take || [],
+          pay: c.pay || 0,
+          receive: c.receive || 0,
+          until: Math.min(now + 20000, s.phase.until),
+        };
+        break;
+      }
+      case "cancelTrade":
+        inPhase(s, "manage");
+        s.trade = null;
+        break;
+      case "end":
+        inPhase(s, "manage");
+        nextTurn(s, now);
+        break;
+      case "surrender":
+        inPhase(s, "manage", "roll", "jail", "debt");
+        bankrupt(s, now);
+        break;
+      default:
+        throw Error("Неизвестная команда");
+    }
+  }
+  s.version++;
+  assertGame(s);
+  return s;
+}
+function tick(source, now, r) {
+  let s = migrateTableLayout(structuredClone(source)),
+    changed = false;
+  if (s.trade && s.trade.until <= now) {
+    s.trade = null;
+    changed = true;
+  }
+  if (s.rescue) {
+    const n = s.rescue.offers.length;
+    s.rescue.offers = s.rescue.offers.filter((o) => o.until > now);
+    changed ||= n !== s.rescue.offers.length;
+  }
+  if (s.status === "playing" && s.phase.until <= now) {
+    const id = s.active,
+      t = s.phase.type;
+    if (t === "auction") {
+      auctionEnd(s, now);
+      changed = true;
+    } else if (t === "debt") {
+      const p = active(s);
+      if (p.cash + assets(s, id).reduce((v, t) => v + liquidation(t), 0) < s.phase.amount)
+        bankrupt(s, now);
+      else {
+        for (const a of assets(s, id).sort((a, b) => a.id - b.id)) {
+          while (a.level && p.cash < s.phase.amount) bankSell(s, a, true);
+        }
+        for (const a of assets(s, id).sort(
+          (a, b) => (a.type === "fountain") - (b.type === "fountain") || a.price - b.price,
+        )) {
+          if (p.cash >= s.phase.amount) break;
+          bankSell(s, a);
+        }
+        settle(s, now, r);
+      }
+      changed = true;
+    } else {
+      const map = {
+        roll: { type: "roll" },
+        jail: { type: "jail", choice: "roll" },
+        purchase: { type: "auction" },
+        search: { type: "skip" },
+        award: { type: "skip" },
+        takeover: { type: "skip" },
+        manage: { type: "end" },
+      };
+      if (map[t]) {
+        s = apply(s, id, map[t], now, r);
+        changed = true;
+      }
+    }
+  }
+  if (changed) {
+    s.version++;
+    assertGame(s);
+    return s;
+  }
+  return null;
+}
+function assertGame(s) {
+  ok(s.players.length <= 6, "Лимит мест");
+  ok(new Set(s.players.map((p) => p.bank)).size === s.players.length, "Банки повторяются");
+  ok(new Set(s.players.map((p) => p.pawn)).size === s.players.length, "Фигурки повторяются");
+  ok(s.tiles.length === 40, "Поле");
+  for (const p of s.players) {
+    ok(Number.isSafeInteger(p.cash) && p.cash >= 0, "Отрицательные наличные");
+    if (p.loan) ok(p.loan.total === p.loan.principal + p.loan.fee, "Договор");
+  }
+  for (const t of s.tiles) {
+    ok(Number.isInteger(t.level) && t.level >= 0 && t.level <= 3, "Уровень");
+    ok(!t.owner || (player(s, t.owner) && !player(s, t.owner).out), "Владелец");
+    if (t.type === "fountain") ok(t.price === 200000 && t.level === 0, "Фонтан");
+  }
+  ok(
+    s.award === null || (s.tiles[s.award]?.type === "property" && s.tiles[s.award].owner),
+    "Единственная награда",
+  );
+  return true;
+}
+function publicState(s, id) {
+  const o = migrateTableLayout(structuredClone(s));
+  delete o.chance;
+  delete o.risk;
+  delete o.chanceDiscard;
+  delete o.riskDiscard;
+  if (o.phase.type === "auction") {
+    o.bidCount = Object.keys(o.bids).length;
+    o.myBid = o.bids[id] ?? null;
+  }
+  delete o.bids;
+  if (o.trade && o.trade.from !== id && o.trade.to !== id) o.trade = null;
+  if (o.rescue && s.active !== id) o.rescue.offers = o.rescue.offers.filter((a) => a.bidder === id);
+  o.myAvailable = player(s, id) ? available(s, id) : 0;
+  return o;
+}
+
+// Native WebGL renderer: no remote libraries, assets, or game authority.
+// All prices, ownership and moves arrive from the existing game engine.
+function scenePosition(index) {
+  const i = ((index % 40) + 40) % 40;
+  if (i <= 10) return [5 - i, 5];
+  if (i <= 20) return [-5, 15 - i];
+  if (i <= 30) return [i - 25, -5];
+  return [5, i - 35];
+}
+function sceneMotionPath(event) {
+  if (event.kind !== "walk") return [event.to];
+  return Array.from(
+    { length: Math.min(80, Math.max(0, event.steps || 0)) },
+    (_, i) => (event.from + i + 1) % 40,
+  );
+}
+function sceneInward(index) {
+  const i = ((index % 40) + 40) % 40;
+  if (i % 10 === 0) {
+    const [x, z] = scenePosition(i),
+      d = Math.hypot(x, z);
+    return [-x / d, -z / d];
+  }
+  return i < 10 ? [0, -1] : i < 20 ? [1, 0] : i < 30 ? [0, 1] : [-1, 0];
+}
+function sceneLabelAngle(index) {
+  const i = ((index % 40) + 40) % 40;
+  if (i % 10 === 0) return Math.PI / 4;
+  const [dx, dz] = sceneInward(i);
+  return Math.atan2(dx, dz);
+}
+function sceneTileSize(index) {
+  return ((index % 10) + 10) % 10 === 0 ? [1.12, 1.12] : [0.84, 1.18];
+}
+function scenePawnPosition(index) {
+  const [x, z] = scenePosition(index),
+    [dx, dz] = sceneInward(index);
+  return [x - dx * 0.34, z - dz * 0.34];
+}
+function sceneBuildingKind(t) {
+  return t.type === "property" && t.owner
+    ? ["house", "shop", "office", "tower"][Math.min(3, Math.max(0, t.level || 0))]
+    : null;
+}
+const DICE_PIPS = Object.freeze({
+  1: [[0, 0]],
+  2: [[-1, -1], [1, 1]],
+  3: [[-1, -1], [0, 0], [1, 1]],
+  4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+  5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+  6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]],
+});
+function sceneDicePips(value) {
+  return DICE_PIPS[Math.max(1, Math.min(6, Number(value) || 1))].map((p) => [...p]);
+}
+function sceneDiceStage(elapsed, reduceMotion = false) {
+  const ms = Math.max(0, Number(elapsed) || 0);
+  if (reduceMotion) return ms < 450 ? "values" : ms < 1050 ? "sum" : "done";
+  return ms < 900 ? "rolling" : ms < 1500 ? "values" : ms < 2250 ? "sum" : "done";
+}
+function createBoardScene({ onSelect, onModeChange, onError } = {}) {
+  const canvas = document.createElement("canvas");
+  canvas.className = "world-canvas";
+  canvas.setAttribute(
+    "aria-label",
+    "Объёмное поле Kentopoly. Перетащи для поворота; выбери клетку нажатием или через список.",
+  );
+  canvas.tabIndex = 0;
+  const gl = canvas.getContext("webgl", {
+    alpha: true,
+    antialias: true,
+    premultipliedAlpha: false,
+    preserveDrawingBuffer: true,
+  });
+  if (!gl)
+    throw Error(
+      "WebGL недоступен. Включи аппаратное ускорение браузера или открой игру на устройстве с WebGL.",
+    );
+  canvas.dataset.renderer = "webgl";
+  const norm = (v) => {
+    const d = Math.hypot(...v) || 1;
+    return v.map((x) => x / d);
+  };
+  const cross = (a, b) => [
+    a[1] * b[2] - a[2] * b[1],
+    a[2] * b[0] - a[0] * b[2],
+    a[0] * b[1] - a[1] * b[0],
+  ];
+  const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
+  const mult = (a, b) => {
+    const o = new Float32Array(16);
+    for (let c = 0; c < 4; c++)
+      for (let r = 0; r < 4; r++)
+        for (let k = 0; k < 4; k++) o[c * 4 + r] += a[k * 4 + r] * b[c * 4 + k];
+    return o;
+  };
+  const look = (eye, target) => {
+    const z = norm(eye.map((v, i) => v - target[i])),
+      x = norm(cross([0, 1, 0], z)),
+      y = cross(z, x);
+    return new Float32Array([
+      x[0],
+      y[0],
+      z[0],
+      0,
+      x[1],
+      y[1],
+      z[1],
+      0,
+      x[2],
+      y[2],
+      z[2],
+      0,
+      -dot(x, eye),
+      -dot(y, eye),
+      -dot(z, eye),
+      1,
+    ]);
+  };
+  const perspective = (fov, aspect) => {
+    const f = 1 / Math.tan(fov / 2),
+      n = 0.1,
+      far = 100;
+    return new Float32Array([
+      f / aspect,
+      0,
+      0,
+      0,
+      0,
+      f,
+      0,
+      0,
+      0,
+      0,
+      (far + n) / (n - far),
+      -1,
+      0,
+      0,
+      (2 * far * n) / (n - far),
+      0,
+    ]);
+  };
+  const model = (x, y, z, sx, sy, sz, angle = 0) => {
+    const c = Math.cos(angle),
+      s = Math.sin(angle);
+    return new Float32Array([c * sx, 0, -s * sx, 0, 0, sy, 0, 0, s * sz, 0, c * sz, 0, x, y, z, 1]);
+  };
+  const color = (hex) => {
+    let h = hex.replace("#", "");
+    if (h.length === 3)
+      h = h
+        .split("")
+        .map((x) => x + x)
+        .join("");
+    return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+  };
+  const shader = (type, source) => {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, source);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const program = gl.createProgram();
+  const vertex = shader(
+    gl.VERTEX_SHADER,
+    `attribute vec3 position;attribute vec3 normal;attribute vec2 uv;uniform mat4 vp;uniform mat4 model;varying vec3 n;varying vec3 world;varying vec2 texcoord;void main(){vec4 p=model*vec4(position,1.);world=p.xyz;n=normalize(mat3(model)*normal);texcoord=uv;gl_Position=vp*p;}`,
+  );
+  const anisotropy = gl.getExtension("EXT_texture_filter_anisotropic");
+  const fragment = shader(
+    gl.FRAGMENT_SHADER,
+    `precision mediump float;uniform vec3 tint;uniform sampler2D tex;uniform float textured;uniform float unlit;uniform vec3 eye;varying vec3 n;varying vec3 world;varying vec2 texcoord;void main(){vec4 t=texture2D(tex,texcoord);if(textured>.5&&t.a<.04)discard;vec3 c=mix(tint,t.rgb,textured);vec3 nn=normalize(n);vec3 light=normalize(vec3(-.6,1.,.8));float diff=max(dot(nn,light),0.);vec3 h=normalize(light+normalize(eye-world));float spec=pow(max(dot(nn,h),0.),40.)*.18*(1.-textured);float shade=mix(.53+.47*diff,1.,unlit);gl_FragColor=vec4(c*shade+spec,mix(1.,t.a,textured));}`,
+  );
+  gl.attachShader(program, vertex);
+  gl.attachShader(program, fragment);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+    throw Error("Не удалось создать 3D-программу");
+  gl.useProgram(program);
+  const loc = {};
+  for (const k of ["vp", "model", "tint", "tex", "textured", "unlit", "eye"])
+    loc[k] = gl.getUniformLocation(program, k);
+  const attrs = ["position", "normal", "uv"].map((k) => gl.getAttribLocation(program, k));
+  gl.enable(gl.DEPTH_TEST);
+  gl.depthFunc(gl.LEQUAL);
+  gl.disable(gl.CULL_FACE);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  gl.uniform1i(loc.tex, 0);
+  const resources = { buffers: [], textures: [] };
+  function mesh(verts) {
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+    resources.buffers.push(buffer);
+    return { buffer, count: verts.length / 8 };
+  }
+  function quad(
+    out,
+    a,
+    b,
+    c,
+    d,
+    n,
+    uvs = [
+      [0, 0],
+      [1, 0],
+      [1, 1],
+      [0, 1],
+    ],
+  ) {
+    for (const i of [0, 1, 2, 0, 2, 3]) out.push(...[a, b, c, d][i], ...n, ...uvs[i]);
+  }
+  const b = [];
+  quad(b, [-0.5, 0, 0.5], [0.5, 0, 0.5], [0.5, 1, 0.5], [-0.5, 1, 0.5], [0, 0, 1]);
+  quad(b, [0.5, 0, -0.5], [-0.5, 0, -0.5], [-0.5, 1, -0.5], [0.5, 1, -0.5], [0, 0, -1]);
+  quad(b, [0.5, 0, 0.5], [0.5, 0, -0.5], [0.5, 1, -0.5], [0.5, 1, 0.5], [1, 0, 0]);
+  quad(b, [-0.5, 0, -0.5], [-0.5, 0, 0.5], [-0.5, 1, 0.5], [-0.5, 1, -0.5], [-1, 0, 0]);
+  quad(b, [-0.5, 1, 0.5], [0.5, 1, 0.5], [0.5, 1, -0.5], [-0.5, 1, -0.5], [0, 1, 0]);
+  quad(b, [-0.5, 0, -0.5], [0.5, 0, -0.5], [0.5, 0, 0.5], [-0.5, 0, 0.5], [0, -1, 0]);
+  const box = mesh(b);
+  const pl = [];
+  quad(pl, [-0.5, 0, 0.5], [0.5, 0, 0.5], [0.5, 0, -0.5], [-0.5, 0, -0.5], [0, 1, 0]);
+  const plane = mesh(pl);
+  function lathe(profile, segments = 24) {
+    const a = [];
+    for (let j = 0; j < profile.length - 1; j++) {
+      const [r0, y0] = profile[j],
+        [r1, y1] = profile[j + 1];
+      for (let i = 0; i < segments; i++) {
+        const q0 = (i / segments) * Math.PI * 2,
+          q1 = ((i + 1) / segments) * Math.PI * 2;
+        const points = [
+          [r0 * Math.cos(q0), y0, r0 * Math.sin(q0)],
+          [r0 * Math.cos(q1), y0, r0 * Math.sin(q1)],
+          [r1 * Math.cos(q1), y1, r1 * Math.sin(q1)],
+          [r1 * Math.cos(q0), y1, r1 * Math.sin(q0)],
+        ];
+        for (const ix of [0, 1, 2, 0, 2, 3]) {
+          const q = ix === 0 || ix === 3 ? q0 : q1;
+          const n = norm([Math.cos(q) * (y1 - y0), r0 - r1, Math.sin(q) * (y1 - y0)]);
+          a.push(...points[ix], ...n, 0, 0);
+        }
+      }
+    }
+    return mesh(a);
+  }
+  const cylinder = lathe([
+    [0, 0],
+    [0.5, 0],
+    [0.5, 1],
+    [0, 1],
+  ]);
+  const cone = lathe([
+    [0, 0],
+    [0.5, 0],
+    [0.1, 1],
+    [0, 1],
+  ]);
+  const sphere = lathe(
+    Array.from({ length: 15 }, (_, i) => [
+      Math.sin((i / 14) * Math.PI) * 0.5,
+      (1 - Math.cos((i / 14) * Math.PI)) * 0.5,
+    ]),
+  );
+  const pawn = lathe([
+    [0, 0],
+    [0.24, 0],
+    [0.27, 0.06],
+    [0.26, 0.14],
+    [0.17, 0.21],
+    [0.1, 0.49],
+    [0.15, 0.54],
+    [0.2, 0.6],
+    [0.22, 0.72],
+    [0.16, 0.83],
+    [0, 0.87],
+  ]);
+  const angularPawn = lathe(
+    [
+      [0, 0],
+      [0.25, 0],
+      [0.25, 0.12],
+      [0.16, 0.2],
+      [0.1, 0.49],
+      [0.2, 0.58],
+      [0.21, 0.74],
+      [0.12, 0.84],
+      [0, 0.84],
+    ],
+    6,
+  );
+  const ring = lathe(
+    [
+      [0.44, 0],
+      [0.5, 0],
+      [0.5, 0.035],
+      [0.44, 0.035],
+      [0.44, 0],
+    ],
+    32,
+  );
+  const cup = lathe(
+    [
+      [0, 0],
+      [0.09, 0],
+      [0.12, 0.11],
+      [0.27, 0.37],
+      [0.26, 0.42],
+      [0.21, 0.42],
+      [0.15, 0.26],
+      [0, 0.24],
+    ],
+    24,
+  );
+  const bowl = lathe(
+    [
+      [0, 0],
+      [0.45, 0],
+      [0.5, 0.12],
+      [0.48, 0.19],
+      [0.4, 0.19],
+      [0.34, 0.1],
+      [0, 0.1],
+    ],
+    28,
+  );
+  let white = gl.createTexture();
+  resources.textures.push(white);
+  gl.bindTexture(gl.TEXTURE_2D, white);
+  gl.texImage2D(
+    gl.TEXTURE_2D,
+    0,
+    gl.RGBA,
+    1,
+    1,
+    0,
+    gl.RGBA,
+    gl.UNSIGNED_BYTE,
+    new Uint8Array([255, 255, 255, 255]),
+  );
+  function texture(draw, size = 256) {
+    const c = document.createElement("canvas");
+    c.width = c.height = size;
+    const ctx = c.getContext("2d");
+    draw(ctx, size);
+    const t = gl.createTexture();
+    resources.textures.push(t);
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    if (anisotropy)
+      gl.texParameterf(
+        gl.TEXTURE_2D,
+        anisotropy.TEXTURE_MAX_ANISOTROPY_EXT,
+        Math.min(8, gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)),
+      );
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    return t;
+  }
+  const centerTexture = texture((c, n) => {
+    c.fillStyle = "#159b72";
+    c.fillRect(0, 0, n, n);
+    c.strokeStyle = "#ffffff0b";
+    c.lineWidth = 1;
+    for (let x = 0; x < n; x += 32) {
+      c.beginPath();
+      c.moveTo(x, 0);
+      c.lineTo(x, n);
+      c.stroke();
+      c.beginPath();
+      c.moveTo(0, x);
+      c.lineTo(n, x);
+      c.stroke();
+    }
+    c.strokeStyle = "#d9c48260";
+    c.lineWidth = 3;
+    c.strokeRect(35, 35, n - 70, n - 70);
+    c.textAlign = "center";
+    c.fillStyle = "#c7d9ca";
+    c.font = "500 23px Arial";
+    c.fillText("Д Р У Ж Е С К И Й  К А П И Т А Л", n * 0.5, n * 0.1);
+    c.fillStyle = "#fff1a7";
+    c.font = "bold 88px Arial";
+    c.fillText("KENTOPOLY", n * 0.5, n * 0.2);
+    c.fillStyle = "#c5ded5";
+    c.font = "23px Arial";
+    c.fillText("4 ФОНТАНА  /  4 МОНОПОЛИИ", n * 0.5, n * 0.3);
+    c.font = "18px Arial";
+    c.fillStyle = "#acd0c1";
+  }, 1024);
+  let snapshot = null,
+    me = null,
+    selected = -1,
+    roomKey = null,
+    tilesTextures = [],
+    tileSignature = "",
+    motionSeq = 0,
+    rollSeq = 0,
+    queue = [],
+    playing = null,
+    diceAnimation = null,
+    pawnPositions = new Map(),
+    lastFrame = 0,
+    raf = 0,
+    disposed = false;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let follow = !reduced.matches,
+    azimuth = Math.PI / 4,
+    pitch = 0.88,
+    zoom = 1,
+    target = [0, 0, 0],
+    cameraTarget = [0, 0, 0],
+    cameraRadius = 25,
+    eye = [12, 17, 12],
+    vp = null,
+    width = 1,
+    height = 1,
+    lastMode = "",
+    finishAt = -Infinity,
+    lastMovingId = null,
+    drawCount = 0;
+  const BANK_COLORS = {
+    sber: "#39c87c",
+    tbank: "#f1ce48",
+    alfa: "#f05b63",
+    vtb: "#50b3ec",
+    psb: "#f39349",
+    gpb: "#9b93e6",
+    sov: "#bb86d8",
+    raif: "#dce775",
+  };
+  function setMode() {
+    const mode = follow ? "follow" : "overview";
+    canvas.dataset.cameraMode = mode;
+    onModeChange?.(mode);
+  }
+  function tileTexture(t) {
+    return texture((c, n) => {
+      c.clearRect(0, 0, n, n);
+      c.fillStyle = "#173954";
+      c.textAlign = "center";
+      const aliases = {
+          start: "НАЧАЛО",
+          jail: "ТЮРЬМА",
+          search: "ПОИСК",
+          award: "2026 AWARDS",
+          fountain: "ФОНТАН",
+          rest: "ПЕРЕДЫШКА",
+        },
+        name = aliases[t.type] || t.name;
+      let lines = [],
+        line = "";
+      c.font = "bold 42px Arial";
+      for (const word of name.split(" ")) {
+        const trial = line ? line + " " + word : word;
+        if (c.measureText(trial).width > 242 && line) {
+          lines.push(line);
+          line = word;
+        } else line = trial;
+      }
+      lines.push(line);
+      lines.slice(0, 3).forEach((txt, i) => {
+        while (c.measureText(txt).width > 244) txt = txt.slice(0, -2) + "…";
+        c.fillText(txt, 128, 56 + i * 47);
+      });
+      c.font = "bold 36px Arial";
+      c.fillStyle = "#215574";
+      c.fillText(
+        t.price
+          ? "$" + t.price / 1000 + "K"
+          : t.type === "start"
+            ? "+$150K"
+            : t.tax
+              ? "−$" + t.tax / 1000 + "K"
+              : "",
+        128,
+        218,
+      );
+    });
+  }
+  function update(s, playerId, sel) {
+    snapshot = s;
+    me = playerId;
+    selected = sel;
+    const key = s.id + ":" + s.seed + ":" + (s.layoutVersion || 0);
+    const fresh = roomKey !== key;
+    const sig = s.tiles.map((t) => t.name).join("|");
+    if (sig !== tileSignature) {
+      for (const t of tilesTextures) {
+        gl.deleteTexture(t);
+        resources.textures = resources.textures.filter((x) => x !== t);
+      }
+      tilesTextures = s.tiles.map(tileTexture);
+      tileSignature = sig;
+    }
+    if (fresh) {
+      roomKey = key;
+      queue = [];
+      playing = null;
+      diceAnimation = null;
+      motionSeq = s.motions?.at(-1)?.seq || 0;
+      rollSeq = s.lastRoll?.seq || s.rollSeq || 0;
+      pawnPositions = new Map(
+        s.players.map((p) => [
+          p.id,
+          { pos: p.pos, x: scenePawnPosition(p.pos)[0], z: scenePawnPosition(p.pos)[1], hop: 0 },
+        ]),
+      );
+      cameraTarget = [0, 0, 0];
+      target = [0, 0, 0];
+      zoom = 1;
+      azimuth = Math.PI / 4;
+      finishAt = -Infinity;
+    }
+    if (!fresh) {
+      const roll = s.lastRoll;
+      if (roll?.seq > rollSeq && Array.isArray(roll.dice) && roll.dice.length === 2) {
+        rollSeq = roll.seq;
+        diceAnimation = {
+          seq: roll.seq,
+          playerId: roll.playerId,
+          dice: roll.dice.map((n) => Math.max(1, Math.min(6, Number(n) || 1))),
+          total: Number(roll.total) || Number(roll.dice[0]) + Number(roll.dice[1]),
+          started: performance.now(),
+          stage: "",
+        };
+      }
+      const newEvents = (s.motions || []).filter((e) => e.seq > motionSeq);
+      if (newEvents.length && newEvents[0].seq > motionSeq + 1) {
+        queue = [];
+        playing = null;
+        motionSeq = newEvents.at(-1).seq;
+        newEvents.length = 0;
+      }
+      for (const e of newEvents) {
+        motionSeq = e.seq;
+        for (const to of sceneMotionPath(e)) queue.push({ id: e.playerId, to, kind: e.kind });
+      }
+      if (queue.length > 80) {
+        queue = [];
+        playing = null;
+      }
+      for (const p of s.players) {
+        if (!pawnPositions.has(p.id) || (!playing && !queue.length)) {
+          const [x, z] = scenePawnPosition(p.pos);
+          pawnPositions.set(p.id, { pos: p.pos, x, z, hop: 0 });
+        }
+      }
+    }
+    if (reduced.matches) {
+      queue = [];
+      playing = null;
+      for (const p of s.players) {
+        const [x, z] = scenePawnPosition(p.pos);
+        pawnPositions.set(p.id, { pos: p.pos, x, z, hop: 0 });
+      }
+    }
+    canvas.dataset.motionSeq = String(motionSeq);
+    canvas.dataset.rollSeq = String(rollSeq);
+    setMode();
+  }
+  function project(x, y, z) {
+    if (!vp) return null;
+    const w = vp[3] * x + vp[7] * y + vp[11] * z + vp[15];
+    if (w <= 0) return null;
+    return [
+      (((vp[0] * x + vp[4] * y + vp[8] * z + vp[12]) / w) * width) / 2 + width / 2,
+      ((-(vp[1] * x + vp[5] * y + vp[9] * z + vp[13]) / w) * height) / 2 + height / 2,
+      (vp[2] * x + vp[6] * y + vp[10] * z + vp[14]) / w,
+    ];
+  }
+  function inside(pt, poly) {
+    if (poly.some((p) => !p)) return false;
+    let sign = 0;
+    for (let i = 0; i < poly.length; i++) {
+      const a = poly[i],
+        b = poly[(i + 1) % poly.length],
+        v = (b[0] - a[0]) * (pt[1] - a[1]) - (b[1] - a[1]) * (pt[0] - a[0]);
+      if (Math.abs(v) < 0.001) continue;
+      if (sign && Math.sign(v) !== sign) return false;
+      sign = Math.sign(v);
+    }
+    return true;
+  }
+  function pick(cx, cy) {
+    let best = null;
+    for (let i = 0; i < 40; i++) {
+      const [x, z] = scenePosition(i),
+        [tileW, tileD] = sceneTileSize(i),
+        corner = i % 10 === 0,
+        inward = corner ? [0, 1] : sceneInward(i),
+        tangent = corner ? [1, 0] : [inward[1], -inward[0]],
+        poly = [
+          [-tileW / 2, -tileD / 2],
+          [tileW / 2, -tileD / 2],
+          [tileW / 2, tileD / 2],
+          [-tileW / 2, tileD / 2],
+        ].map(([a, b]) => project(x + tangent[0] * a + inward[0] * b, 0.32, z + tangent[1] * a + inward[1] * b));
+      if (inside([cx, cy], poly)) {
+        const d = project(x, 0.32, z)[2];
+        if (!best || d < best.depth) best = { id: i, depth: d };
+      }
+    }
+    return best?.id ?? null;
+  }
+  let historyOffset = 0,
+    chronicleKey = "";
+  function logPosition() {
+    const el = document.querySelector("#board-chronicle");
+    if (!el || !snapshot) return;
+    const poly = [
+      [-3.85, -3.85],
+      [3.85, -3.85],
+      [3.85, 3.85],
+      [-3.85, 3.85],
+    ].map(([x, z]) => project(x, 0.34, z));
+    if (poly.some((p) => !p)) return;
+    const x0 = Math.min(...poly.map((p) => p[0])),
+      x1 = Math.max(...poly.map((p) => p[0])),
+      y0 = Math.min(...poly.map((p) => p[1])),
+      y1 = Math.max(...poly.map((p) => p[1]));
+    let best = null;
+    for (const [w, h] of width > 850
+      ? [
+          [300, 126],
+          [250, 106],
+          [200, 86],
+          [160, 66],
+        ]
+      : [
+          [190, 86],
+          [150, 66],
+          [120, 50],
+          [94, 44],
+        ]) {
+      for (let x = x0; x < x1 - w; x += 10)
+        for (let y = y0; y < y1 - h; y += 10) {
+          if (y < 100 || y + h > height - (width < 700 ? 250 : 80)) continue;
+          if (
+            [
+              [x, y],
+              [x + w, y],
+              [x + w, y + h],
+              [x, y + h],
+            ].every((p) => inside(p, poly))
+          ) {
+            const score =
+              -Math.pow(x + w / 2 - (x0 + x1) / 2 - (x1 - x0) * 0.08, 2) -
+              Math.pow(y + h / 2 - (y0 + y1) / 2 - (y1 - y0) * 0.17, 2);
+            if (!best || score > best.score) best = { x, y, w, h, score };
+          }
+        }
+      if (best) break;
+    }
+    if (!best) {
+      el.style.opacity = "0";
+      return;
+    }
+    const count = best.h > 115 ? 3 : best.h > 65 ? 2 : 1,
+      end = Math.max(0, snapshot.log.length - historyOffset),
+      items = snapshot.log.slice(Math.max(0, end - count), end),
+      key = items.map((l) => l.n + ":" + l.text).join("|") + count;
+    if (key !== chronicleKey || !el.childElementCount) {
+      el.replaceChildren();
+      for (const l of items) {
+        const row = document.createElement("p");
+        row.textContent = l.text;
+        row.dataset.event = String(l.n);
+        el.append(row);
+      }
+      chronicleKey = key;
+    }
+    Object.assign(el.style, {
+      left: best.x + "px",
+      top: best.y + "px",
+      width: best.w + "px",
+      height: best.h + "px",
+      opacity: "1",
+    });
+    el.dataset.lines = String(count);
+    el.dataset.historyOffset = String(historyOffset);
+  }
+  function draw(m, x, y, z, sx, sy, sz, c, texture = null, rot = 0, unlit = 0) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, m.buffer);
+    gl.enableVertexAttribArray(attrs[0]);
+    gl.enableVertexAttribArray(attrs[1]);
+    gl.enableVertexAttribArray(attrs[2]);
+    gl.vertexAttribPointer(attrs[0], 3, gl.FLOAT, false, 32, 0);
+    gl.vertexAttribPointer(attrs[1], 3, gl.FLOAT, false, 32, 12);
+    gl.vertexAttribPointer(attrs[2], 2, gl.FLOAT, false, 32, 24);
+    gl.uniformMatrix4fv(loc.model, false, model(x, y, z, sx, sy, sz, rot));
+    gl.uniform3fv(loc.tint, color(c));
+    gl.uniform1f(loc.textured, texture ? 1 : 0);
+    gl.uniform1f(loc.unlit, unlit);
+    gl.bindTexture(gl.TEXTURE_2D, texture || white);
+    gl.drawArrays(gl.TRIANGLES, 0, m.count);
+    drawCount++;
+  }
+  function trophy(x, z, scale = 1, y = 0.34) {
+    draw(box, x, y, z, 0.48 * scale, 0.09 * scale, 0.4 * scale, "#d2a949");
+    draw(cylinder, x, y + 0.09 * scale, z, 0.16 * scale, 0.24 * scale, 0.16 * scale, "#e2bd5f");
+    draw(cup, x, y + 0.29 * scale, z, scale, scale, scale, "#efd486");
+    draw(ring, x, y + 0.73 * scale, z, 0.64 * scale, 0.6 * scale, 0.64 * scale, "#fff0b5");
+  }
+  const rollMesh = (() => {
+    const out = [];
+    for (let i = 0; i < 24; i++) {
+      const a = (i / 24) * Math.PI * 2,
+        b = ((i + 1) / 24) * Math.PI * 2;
+      quad(
+        out,
+        [Math.cos(a), Math.sin(a), -0.5],
+        [Math.cos(b), Math.sin(b), -0.5],
+        [Math.cos(b), Math.sin(b), 0.5],
+        [Math.cos(a), Math.sin(a), 0.5],
+        [Math.cos((a + b) / 2), Math.sin((a + b) / 2), 0],
+      );
+    }
+    return mesh(out);
+  })();
+  const pyramid = lathe(
+    [
+      [0, 0],
+      [0.5, 0],
+      [0, 1],
+    ],
+    4,
+  );
+  const banknote = texture((c, n) => {
+    c.fillStyle = "#c7ffd3";
+    c.fillRect(0, 0, n, n);
+    c.strokeStyle = "#318e70";
+    c.lineWidth = 7;
+    c.strokeRect(12, 12, n - 24, n - 24);
+    c.lineWidth = 2;
+    c.strokeRect(24, 24, n - 48, n - 48);
+    c.fillStyle = "#116348";
+    c.textAlign = "center";
+    c.font = "bold 116px Georgia";
+    c.fillText("$", n / 2, 162);
+    c.font = "bold 22px Arial";
+    c.fillText("KENT • PLAY MONEY", n / 2, 220);
+  });
+  const propCard = (mark, bg, ink) =>
+    texture((c, n) => {
+      c.fillStyle = bg;
+      c.fillRect(0, 0, n, n);
+      c.strokeStyle = ink;
+      c.lineWidth = 10;
+      c.strokeRect(15, 15, n - 30, n - 30);
+      c.fillStyle = ink;
+      c.textAlign = "center";
+      c.font = "900 132px Arial";
+      c.fillText(mark, n / 2, 172);
+      c.font = "bold 20px Arial";
+      c.fillText("KENTOPOLY", n / 2, 222);
+    });
+  const chanceProp = propCard("?", "#4cbcff", "#0b4168"),
+    riskProp = propCard("!", "#ff6686", "#68152c");
+  function moneyStack(x, z, r, levels = 4) {
+    for (let k = 0; k < levels; k++) {
+      const xx = x + k * 0.11,
+        zz = z - k * 0.07,
+        yy = -0.98 + k * 0.17;
+      draw(box, xx, yy, zz, 1.55, 0.15, 0.8, "#d8f4b7", null, r);
+      draw(plane, xx, yy + 0.155, zz, 1.5, 1, 0.76, "#fff", banknote, r, 1);
+      draw(box, xx, yy + 0.16, zz, 0.17, 0.018, 0.82, "#ffe894", null, r);
+    }
+  }
+  function tokenStack(x, z, c, levels, spread = 0) {
+    for (let k = 0; k < levels; k++)
+      draw(cylinder, x + (k % 2) * spread, -1 + k * 0.075, z, 0.48, 0.07, 0.48, c);
+    draw(ring, x, -0.68 + levels * 0.04, z, 0.52, 1, 0.52, "#fff0a0");
+  }
+  function cardDeck(x, z, r, tex, c) {
+    for (let k = 0; k < 3; k++)
+      draw(box, x + k * 0.035, -0.99 + k * 0.045, z - k * 0.025, 1.18, 0.04, 0.82, c, null, r);
+    draw(plane, x + 0.07, -0.855, z - 0.05, 1.14, 1, 0.78, "#fff", tex, r, 1);
+  }
+  function backgroundProps() {
+    // The large cash stack remains the hero object behind the board.
+    moneyStack(-9.4, -9.2, -0.42, 5);
+    [
+      [-11.5, -2.5, "#ffd34f", 5],
+      [-10.4, 4.5, "#54d7c8", 4],
+      [-6.8, 9.8, "#ff7b78", 6],
+      [0.2, 11.2, "#ffd34f", 4],
+      [7.4, 9.3, "#7ddc91", 5],
+      [11.1, 3.6, "#75b8ff", 6],
+      [11.4, -4.2, "#e394ff", 4],
+      [6.9, -10.3, "#ffd34f", 5],
+      [-1.7, -11.7, "#65dbea", 6],
+    ].forEach(([x, z, c, levels], i) => tokenStack(x, z, c, levels, i % 2 ? 0.035 : 0));
+    [
+      [-11.2, 7.7, -0.45, chanceProp, "#2778a8"],
+      [11.4, 8.2, 0.38, riskProp, "#a52e50"],
+      [10.5, -8.8, -0.62, chanceProp, "#2778a8"],
+      [-7.1, -11.1, 0.3, riskProp, "#a52e50"],
+    ].forEach(([x, z, r, tex, c]) => cardDeck(x, z, r, tex, c));
+  }
+  function shade(hex, amount) {
+    const rgb = color(hex),
+      target = amount > 0 ? 1 : 0,
+      mix = Math.abs(amount);
+    return (
+      "#" +
+      rgb
+        .map((v) => Math.round((v + (target - v) * mix) * 255).toString(16).padStart(2, "0"))
+        .join("")
+    );
+  }
+  function building(t, x, z) {
+    if (!sceneBuildingKind(t)) return;
+    const d = sceneInward(t.id),
+      tangent = [d[1], -d[0]],
+      rot = Math.atan2(d[0], d[1]),
+      xx = x + d[0] * 0.34,
+      zz = z + d[1] * 0.34,
+      owner = snapshot.players.find((p) => p.id === t.owner),
+      c = BANK_COLORS[owner?.bank] || "#47cfff",
+      light = shade(c, 0.38),
+      dark = shade(c, -0.44),
+      level = Math.min(3, Math.max(0, t.level || 0)),
+      district = Math.min(3, Math.max(0, t.district || 0)),
+      floor = 0.35;
+    draw(box, xx, floor, zz, 0.42, 0.045, 0.34, dark, null, rot);
+    if (district === 0) {
+      // Residential sector: pitched houses grow into a compact apartment block.
+      const h = 0.22 + level * 0.13;
+      draw(box, xx, floor + 0.045, zz, 0.31 + level * 0.015, h, 0.27, light, null, rot);
+      if (level < 2) draw(pyramid, xx, floor + h + 0.045, zz, 0.47, 0.19, 0.41, c, null, rot + Math.PI / 4);
+      else {
+        for (let j = 0; j < level + 1; j++)
+          draw(box, xx - d[0] * 0.145, floor + 0.1 + j * 0.14, zz - d[1] * 0.145, 0.27, 0.055, 0.018, dark, null, rot);
+        draw(box, xx, floor + h + 0.045, zz, 0.36, 0.055, 0.31, c, null, rot);
+      }
+      draw(box, xx - d[0] * 0.15, floor + 0.07, zz - d[1] * 0.15, 0.09, 0.13, 0.018, dark, null, rot);
+    } else if (district === 1) {
+      // Retail sector: a wide storefront with awnings and stacked shopping floors.
+      const floors = 1 + Math.min(2, level);
+      for (let j = 0; j < floors; j++)
+        draw(box, xx, floor + 0.045 + j * 0.2, zz, 0.44 - j * 0.04, 0.19, 0.3, j % 2 ? light : c, null, rot);
+      draw(box, xx - d[0] * 0.17, floor + 0.12, zz - d[1] * 0.17, 0.38, 0.11, 0.025, "#d9f6ff", null, rot);
+      draw(box, xx - d[0] * 0.19, floor + 0.28, zz - d[1] * 0.19, 0.46, 0.07, 0.07, dark, null, rot);
+      draw(box, xx, floor + 0.27 + floors * 0.2, zz, 0.25, 0.075, 0.2, c, null, rot);
+    } else if (district === 2) {
+      // Service sector: a round civic hub with two side wings and a signal mast.
+      const h = 0.3 + level * 0.12;
+      draw(cylinder, xx, floor + 0.045, zz, 0.3, h, 0.3, c);
+      for (const side of [-1, 1])
+        draw(box, xx + tangent[0] * side * 0.17, floor + 0.055, zz + tangent[1] * side * 0.17, 0.16, h * 0.68, 0.24, light, null, rot);
+      draw(ring, xx, floor + h + 0.05, zz, 0.38, 1, 0.38, dark);
+      if (level > 0) {
+        draw(cylinder, xx, floor + h + 0.08, zz, 0.035, 0.22 + level * 0.06, 0.035, "#fff0a1");
+        draw(sphere, xx, floor + h + 0.28 + level * 0.06, zz, 0.1, 0.1, 0.1, light);
+      }
+    } else {
+      // Corporate sector: asymmetric glass towers with a taller skyline per level.
+      const h = 0.52 + level * 0.17;
+      draw(box, xx, floor + 0.045, zz, 0.27, h, 0.28, dark, null, rot);
+      for (let j = 0; j < 3 + level; j++)
+        draw(box, xx, floor + 0.12 + j * 0.13, zz, 0.285, 0.035, 0.295, light, null, rot);
+      if (level > 0)
+        draw(box, xx + tangent[0] * 0.17, floor + 0.045, zz + tangent[1] * 0.17, 0.15, h * 0.62, 0.22, c, null, rot);
+      draw(box, xx, floor + h + 0.045, zz, 0.31, 0.06, 0.32, c, null, rot);
+      if (level === 3) draw(cylinder, xx, floor + h + 0.1, zz, 0.025, 0.28, 0.025, "#fff1a7");
+    }
+  }
+  function drawDie(x, y, z, value, yaw, settled) {
+    draw(cylinder, x, 0.326, z, 0.82, 0.018, 0.82, "#092e36", null, 0, settled ? 0.38 : 0.18);
+    draw(box, x, y, z, 0.76, 0.08, 0.76, "#d4a936", null, yaw, 1);
+    draw(box, x, y + 0.06, z, 0.7, 0.62, 0.7, "#fff4cf", null, yaw, 1);
+    const cos = Math.cos(yaw), sin = Math.sin(yaw);
+    for (const [px, pz] of sceneDicePips(value)) {
+      const ox = px * 0.19, oz = pz * 0.19;
+      draw(
+        sphere,
+        x + ox * cos + oz * sin,
+        y + 0.7,
+        z - ox * sin + oz * cos,
+        0.095,
+        0.026,
+        0.095,
+        "#173954",
+      );
+    }
+  }
+  function renderDice(time) {
+    const label = document.querySelector("#dice-result");
+    if (!diceAnimation) {
+      document.body.classList.remove("dice-in-flight");
+      if (label) label.className = "dice-result";
+      canvas.dataset.diceStage = "idle";
+      return;
+    }
+    document.body.classList.add("dice-in-flight");
+    const elapsed = time - diceAnimation.started,
+      stage = sceneDiceStage(elapsed, reduced.matches);
+    if (stage === "done") {
+      document.body.classList.remove("dice-in-flight");
+      if (label) label.className = "dice-result";
+      canvas.dataset.diceStage = "done";
+      diceAnimation = null;
+      return;
+    }
+    diceAnimation.stage = stage;
+    const rolling = stage === "rolling",
+      progress = rolling ? Math.min(1, elapsed / 900) : 1;
+    diceAnimation.dice.forEach((finalValue, index) => {
+      const side = index ? 1 : -1,
+        x = rolling
+          ? side * (2.15 - progress * 1.34) + Math.sin(progress * 11 + index * 2.3) * 0.16
+          : side * 0.78,
+        z = rolling
+          ? -1.65 + progress * 1.78 + Math.cos(progress * 9 + index) * 0.2
+          : 0.12 + side * 0.18,
+        y = rolling
+          ? 0.34 + (1 - progress) * 1.25 + Math.abs(Math.sin(progress * Math.PI * 3)) * (0.9 - progress * 0.35)
+          : 0.34,
+        yaw = rolling ? progress * (index ? -13 : 15) + index * 0.7 : side * 0.18,
+        value = rolling ? ((Math.floor(elapsed / 85) + index * 3) % 6) + 1 : finalValue;
+      drawDie(x, y, z, value, yaw, !rolling);
+    });
+    if (label) {
+      const [a, b] = diceAnimation.dice,
+        sum = stage === "sum" ? `<i>=</i><b class="dice-total">${diceAnimation.total}</b>` : "";
+      label.className = `dice-result is-visible is-${stage}`;
+      label.innerHTML = `<span>${stage === "rolling" ? "КУБИКИ НА СТОЛЕ" : stage === "sum" ? "СУММА ХОДА" : "ВЫПАЛО"}</span><div><b>${stage === "rolling" ? "•" : a}</b><i>+</i><b>${stage === "rolling" ? "•" : b}</b>${sum}</div>`;
+    }
+    canvas.dataset.diceStage = stage;
+    canvas.dataset.diceTotal = String(diceAnimation.total);
+  }
+  function frame(time) {
+    if (disposed) return;
+    raf = requestAnimationFrame(frame);
+    if (!canvas.isConnected || !snapshot || document.hidden || gl.isContextLost()) return;
+    const dt = Math.min(0.15, (time - (lastFrame || time)) / 1000);
+    lastFrame = time;
+    if (snapshot.status === "lobby" && !reduced.matches) azimuth += dt * 0.09;
+    const rect = canvas.getBoundingClientRect();
+    width = Math.max(1, rect.width);
+    height = Math.max(1, rect.height);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    if (!diceAnimation && !playing && queue.length) {
+      const e = queue.shift(),
+        p = pawnPositions.get(e.id);
+      if (p) {
+        const [x, z] = scenePawnPosition(e.to);
+        playing = {
+          ...e,
+          from: [p.x, p.z],
+          target: [x, z],
+          started: time,
+          duration: e.kind === "walk" ? 310 : 680,
+        };
+        canvas.dataset.animationCount = String(Number(canvas.dataset.animationCount || 0) + 1);
+      }
+    }
+    let moving = null;
+    if (playing) {
+      const p = pawnPositions.get(playing.id);
+      let t = Math.min(1, (time - playing.started) / playing.duration),
+        q = t * t * (3 - 2 * t);
+      p.x = playing.from[0] + (playing.target[0] - playing.from[0]) * q;
+      p.z = playing.from[1] + (playing.target[1] - playing.from[1]) * q;
+      p.hop = Math.sin(t * Math.PI) * (playing.kind === "walk" ? 0.11 : 0.7);
+      moving = playing.id;
+      if (t >= 1) {
+        p.pos = playing.to;
+        p.hop = 0;
+        finishAt = time;
+        lastMovingId = playing.id;
+        playing = null;
+      }
+    }
+    if (follow && !reduced.matches && (moving || time - finishAt < 1000)) {
+      const p = pawnPositions.get(moving || lastMovingId);
+      target = p ? [p.x * 0.5, 0, p.z * 0.5] : [0, 0, 0];
+    } else target = [0, 0, 0];
+    const ease = reduced.matches ? 1 : 1 - Math.exp(-dt * 3.7);
+    cameraTarget = cameraTarget.map((v, i) => v + (target[i] - v) * ease);
+    const fit = width / height < 1 ? 1.65 / (width / height + 0.25) : width < 1100 ? 1.2 : 1;
+    const desired = 25 * fit * zoom;
+    cameraRadius += (desired - cameraRadius) * (reduced.matches ? 1 : Math.min(1, dt * 5));
+    eye = [
+      cameraTarget[0] + Math.sin(azimuth) * Math.cos(pitch) * cameraRadius,
+      Math.sin(pitch) * cameraRadius,
+      cameraTarget[2] + Math.cos(azimuth) * Math.cos(pitch) * cameraRadius,
+    ];
+    const projection = perspective(0.72, width / height);
+    projection[9] = -(width < 700 ? 0.26 : 0.04);
+    projection[8] = width > 1100 ? 0.035 : 0;
+    vp = mult(projection, look(eye, cameraTarget));
+    gl.useProgram(program);
+    gl.uniformMatrix4fv(loc.vp, false, vp);
+    gl.uniform3fv(loc.eye, eye);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    drawCount = 0;
+    draw(plane, 0, -1.035, 0, 70, 1, 70, "#198a93", null, 0, 1);
+    backgroundProps();
+    draw(box, 0, -0.74, 0, 11.86, 0.17, 11.86, "#031e20");
+    draw(box, 0, -0.58, 0, 11.68, 0.16, 11.68, "#ffcf4f");
+    draw(box, 0, -0.42, 0, 11.5, 0.62, 11.5, "#2457a0");
+    draw(box, 0, 0.19, 0, 8.8, 0.12, 8.8, "#12a57a");
+    draw(plane, 0, 0.321, 0, 8.8, 1, 8.8, "#ffffff", centerTexture, 0, 1);
+    for (const t of snapshot.tiles) {
+      const [x, z] = scenePosition(t.id),
+        [cardW, cardD] = sceneTileSize(t.id),
+        corner = t.id % 10 === 0,
+        inward = sceneInward(t.id),
+        cardInward = corner ? [0, 1] : inward,
+        tangent = corner ? [1, 0] : [inward[1], -inward[0]],
+        rot = Math.atan2(inward[0], inward[1]),
+        cardRot = corner ? 0 : rot,
+        groupColor =
+          t.color ||
+          {
+            fountain: "#10d5cc",
+            chance: "#58c9ff",
+            risk: "#ff497c",
+            award: "#ffd02a",
+            search: "#8c5bff",
+            start: "#76e954",
+            jail: "#6e92b7",
+          }[t.type] ||
+          "#c1e6d8";
+      draw(box, x, 0.2, z, cardW, 0.13, cardD, corner ? "#cbd2c7" : "#bbc4ba", null, cardRot);
+      draw(plane, x, 0.332, z, cardW - 0.045, 1, cardD - 0.045, "#fffdf1", null, cardRot, 1);
+      draw(
+        box,
+        x + inward[0] * (cardD / 2 - 0.1),
+        0.334,
+        z + inward[1] * (cardD / 2 - 0.1),
+        cardW - 0.07,
+        0.035,
+        0.15,
+        groupColor,
+        null,
+        rot,
+        1,
+      );
+      draw(
+        plane,
+        x - inward[0] * 0.13,
+        0.374,
+        z - inward[1] * 0.13,
+        corner ? 0.66 : 0.61,
+        1,
+        corner ? 0.66 : 0.72,
+        "#fff",
+        tilesTextures[t.id],
+        sceneLabelAngle(t.id),
+        1,
+      );
+      if (t.owner) {
+        const bc = BANK_COLORS[snapshot.players.find((p) => p.id === t.owner)?.bank] || "#fff";
+        draw(
+          box,
+          x + inward[0] * (cardD / 2 - 0.015),
+          0.337,
+          z + inward[1] * (cardD / 2 - 0.015),
+          cardW - 0.12,
+          0.03,
+          0.027,
+          bc,
+          null,
+          rot,
+          1,
+        );
+      }
+      if (t.id === selected) {
+        for (const side of [-1, 1]) {
+          draw(box, x + cardInward[0] * side * cardD / 2, 0.342, z + cardInward[1] * side * cardD / 2, cardW, 0.03, 0.028, "#fbe6a0", null, cardRot, 1);
+          draw(box, x + tangent[0] * side * cardW / 2, 0.342, z + tangent[1] * side * cardW / 2, 0.028, 0.03, cardD, "#fbe6a0", null, cardRot, 1);
+        }
+      }
+      if (t.type === "fountain") {
+        const count = snapshot.tiles.filter(
+          (q) => q.type === "fountain" && q.owner && q.owner === t.owner,
+        ).length;
+        const h = 0.54 + count * 0.12;
+        draw(bowl, x, 0.35, z, 0.73, 0.65, 0.73, "#7ec1b2");
+        draw(cylinder, x, 0.43, z, 0.58, 0.025, 0.58, "#42bad0", null, 0, 1);
+        draw(cylinder, x, 0.43, z, 0.1, h, 0.1, "#bfe7d8");
+        draw(bowl, x, 0.43 + h * 0.65, z, 0.43, 0.45, 0.43, "#bfe7d8");
+        for (let j = 0; j < 5; j++) {
+          const a = (j / 5) * Math.PI * 2,
+            anim = reduced.matches ? 0 : (time * 0.0006 + j) % 1;
+          draw(
+            sphere,
+            x + Math.cos(a) * (0.12 + anim * 0.11),
+            0.56 + h - anim * 0.35,
+            z + Math.sin(a) * (0.12 + anim * 0.11),
+            0.065,
+            0.12,
+            0.065,
+            "#95e9ee",
+            null,
+            0,
+            1,
+          );
+        }
+      }
+      building(t, x, z);
+    }
+    trophy(
+      ...scenePosition(
+        snapshot.award === null
+          ? snapshot.tiles.find((t) => t.type === "award").id
+          : snapshot.award,
+      ),
+      0.83,
+    );
+    // Corner objects are deliberately original low-poly miniatures.
+    const [jx, jz] = scenePosition(10);
+    for (let i = 0; i < 4; i++)
+      draw(cylinder, jx - 0.25 + i * 0.16, 0.35, jz - 0.23, 0.035, 0.4, 0.035, "#627c77");
+    draw(box, jx, 0.72, jz - 0.23, 0.6, 0.04, 0.06, "#728d83");
+    const [sx, sz] = scenePosition(snapshot.tiles.find((t) => t.type === "search").id);
+    draw(cylinder, sx, 0.34, sz, 0.42, 0.16, 0.42, "#9cc8bc");
+    draw(ring, sx, 0.51, sz, 0.7, 2, 0.7, "#e1e7d0");
+    renderDice(time);
+    for (const p of snapshot.players.filter((p) => !p.out)) {
+      const pos = pawnPositions.get(p.id);
+      if (!pos) continue;
+      const cluster = snapshot.players
+          .filter((q) => !q.out && q.pos === p.pos)
+          .sort((a, b) => a.id.localeCompare(b.id)),
+        i = cluster.findIndex((q) => q.id === p.id);
+      const inward = sceneInward(p.pos),
+        tangent = [inward[1], -inward[0]],
+        columns = Math.min(3, cluster.length),
+        column = i % 3,
+        row = Math.floor(i / 3),
+        lateral = (column - (columns - 1) / 2) * 0.19,
+        extraOutward = row * 0.15,
+        x = pos.x + tangent[0] * lateral - inward[0] * extraOutward,
+        z = pos.z + tangent[1] * lateral - inward[1] * extraOutward,
+        y = 0.35 + pos.hop;
+      const col = BANK_COLORS[p.bank] || "#f5edc9";
+      draw(cylinder, x, 0.335, z, 0.44, 0.012, 0.44, "#254c43");
+      if (p.pawn === "tower") draw(angularPawn, x, y, z, 0.76, 0.9, 0.76, col);
+      else if (p.pawn === "rocket") {
+        draw(cone, x, y + 0.05, z, 0.72, 0.78, 0.72, col);
+        draw(sphere, x, y + 0.63, z, 0.34, 0.28, 0.34, "#fff0a6");
+      } else if (p.pawn === "gem") {
+        draw(angularPawn, x, y, z, 0.67, 0.72, 0.67, col);
+        draw(sphere, x, y + 0.58, z, 0.42, 0.42, 0.42, col);
+      } else if (p.pawn === "tycoon") {
+        draw(pawn, x, y, z, 0.72, 0.78, 0.72, col);
+        draw(cylinder, x, y + 0.68, z, 0.34, 0.09, 0.34, "#fff0a6");
+      } else if (p.pawn === "crown") {
+        draw(cup, x, y + 0.03, z, 1.25, 1.45, 1.25, col);
+        draw(sphere, x, y + 0.62, z, 0.28, 0.28, 0.28, "#fff0a6");
+      } else draw(pawn, x, y, z, 0.72, 0.82, 0.72, col);
+      draw(ring, x, y + 0.035, z, 0.5, 1, 0.5, "#e6dba3");
+      if (p.id === (moving || snapshot.active)) {
+        draw(ring, x, 0.352, z, 0.68, 1.3, 0.68, "#85efd7", null, 0, 1);
+        const label = document.querySelector("#pawn-caption"),
+          pt = project(x, y + 1, z);
+        if (label && pt) {
+          label.textContent = p.name;
+          label.style.left = pt[0] + "px";
+          label.style.top = pt[1] + "px";
+          label.style.opacity = "1";
+        }
+      }
+    }
+    logPosition();
+    const status = document.querySelector("#camera-status");
+    if (status)
+      status.textContent = moving
+        ? follow
+          ? "Сопровождение фишки"
+          : "Фишка движется"
+        : follow
+          ? "Автокамера включена"
+          : "Свободная камера";
+    canvas.dataset.motionActive = moving || "";
+    canvas.dataset.cameraTarget = cameraTarget.map((n) => n.toFixed(3)).join(",");
+    canvas.dataset.drawCalls = String(drawCount);
+    canvas.dataset.ready = "true";
+    canvas.dataset.labelAngle = String(sceneLabelAngle(selected >= 0 ? selected : 0));
+    canvas.dataset.labelsStatic = "true";
+    canvas.dataset.buildings = String(snapshot.tiles.filter((t) => sceneBuildingKind(t)).length);
+  }
+  let pointer = null,
+    hover = null;
+  canvas.addEventListener("pointerdown", (ev) => {
+    pointer = {
+      id: ev.pointerId,
+      x: ev.clientX,
+      y: ev.clientY,
+      lastX: ev.clientX,
+      lastY: ev.clientY,
+      moved: false,
+    };
+    try {
+      canvas.setPointerCapture(ev.pointerId);
+    } catch {}
+  });
+  canvas.addEventListener("pointermove", (ev) => {
+    if (pointer && pointer.id === ev.pointerId) {
+      const dx = ev.clientX - pointer.lastX,
+        dy = ev.clientY - pointer.lastY;
+      if (Math.hypot(ev.clientX - pointer.x, ev.clientY - pointer.y) > 5) pointer.moved = true;
+      if (pointer.moved) {
+        azimuth -= dx * 0.006;
+        pitch = Math.max(0.48, Math.min(1.3, pitch + dy * 0.004));
+        follow = false;
+        setMode();
+      }
+      pointer.lastX = ev.clientX;
+      pointer.lastY = ev.clientY;
+    } else {
+      const rect = canvas.getBoundingClientRect(),
+        id = pick(ev.clientX - rect.left, ev.clientY - rect.top);
+      hover = id;
+      canvas.style.cursor = id === null ? "grab" : "pointer";
+      const hint = document.querySelector("#hover-tile");
+      if (hint) {
+        hint.textContent =
+          id === null
+            ? "Нажми на клетку — откроется её карточка"
+            : snapshot.tiles[id].name +
+              " · " +
+              (snapshot.tiles[id].price
+                ? "$" + snapshot.tiles[id].price.toLocaleString("ru-RU")
+                : "Специальная клетка");
+      }
+    }
+  });
+  canvas.addEventListener("pointerup", (ev) => {
+    if (pointer && pointer.id === ev.pointerId && !pointer.moved) {
+      const r = canvas.getBoundingClientRect(),
+        id = pick(ev.clientX - r.left, ev.clientY - r.top);
+      if (id !== null) onSelect?.(id);
+    }
+    pointer = null;
+  });
+  canvas.addEventListener("pointercancel", () => (pointer = null));
+  canvas.addEventListener(
+    "wheel",
+    (ev) => {
+      ev.preventDefault();
+      zoom = Math.max(0.32, Math.min(1.6, zoom * Math.exp(ev.deltaY * 0.001)));
+      follow = false;
+      setMode();
+    },
+    { passive: false },
+  );
+  canvas.addEventListener("keydown", (ev) => {
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "+", "-", "Home"].includes(ev.key)) {
+      ev.preventDefault();
+      if (ev.key === "Home") {
+        overview();
+        return;
+      }
+      if (ev.key === "ArrowLeft") azimuth -= 0.14;
+      if (ev.key === "ArrowRight") azimuth += 0.14;
+      if (ev.key === "ArrowUp") pitch = Math.min(1.3, pitch + 0.08);
+      if (ev.key === "ArrowDown") pitch = Math.max(0.48, pitch - 0.08);
+      if (ev.key === "+") zoom = Math.max(0.68, zoom * 0.9);
+      if (ev.key === "-") zoom = Math.min(1.6, zoom * 1.1);
+      follow = false;
+      setMode();
+    }
+  });
+  canvas.addEventListener("webglcontextlost", (ev) => {
+    ev.preventDefault();
+    onError?.(
+      "Графический контекст потерян. Повтори запуск 3D или перезагрузи страницу; сохранение не удалено.",
+    );
+    canvas.dataset.ready = "false";
+  });
+  function overview() {
+    follow = false;
+    azimuth = Math.PI / 4;
+    pitch = 0.88;
+    zoom = 1;
+    target = [0, 0, 0];
+    setMode();
+  }
+  setMode();
+  raf = requestAnimationFrame(frame);
+  return {
+    canvas,
+    update,
+    setHistoryOffset(value) {
+      historyOffset = Math.max(0, Number(value) || 0);
+      chronicleKey = "";
+      logPosition();
+    },
+    overview,
+    toggleFollow() {
+      follow = !follow && !reduced.matches;
+      setMode();
+      return follow;
+    },
+    rotate(amount) {
+      azimuth += amount;
+      follow = false;
+      setMode();
+    },
+    zoom(amount) {
+      zoom = Math.max(0.32, Math.min(1.6, zoom * amount));
+      follow = false;
+      setMode();
+    },
+    labelBaseline(id) {
+      const [x, z] = scenePosition(id),
+        dx = Math.cos(azimuth) * 0.2,
+        dz = -Math.sin(azimuth) * 0.2;
+      return [project(x - dx, 0.374, z - dz), project(x + dx, 0.374, z + dz)];
+    },
+    projectTile(id) {
+      const [x, z] = scenePosition(id);
+      return project(x, 0.34, z);
+    },
+    debug() {
+      return {
+        azimuth,
+        labelAngle: sceneLabelAngle(azimuth),
+        buildings: snapshot?.tiles
+          .filter((t) => sceneBuildingKind(t))
+          .map((t) => ({ id: t.id, kind: sceneBuildingKind(t) })),
+        motionSeq,
+        rollSeq,
+        diceStage: diceAnimation?.stage || "idle",
+        queue: queue.length,
+        playing: !!playing,
+        follow,
+        drawCalls: drawCount,
+        target: [...cameraTarget],
+        interior: [
+          [-4.2, -4.2],
+          [4.2, -4.2],
+          [4.2, 4.2],
+          [-4.2, 4.2],
+        ].map(([x, z]) => project(x, 0.34, z)),
+      };
+    },
+    destroy() {
+      disposed = true;
+      document.body.classList.remove("dice-in-flight");
+      cancelAnimationFrame(raf);
+      for (const b of resources.buffers) gl.deleteBuffer(b);
+      for (const t of resources.textures) gl.deleteTexture(t);
+      gl.deleteProgram(program);
+      gl.deleteShader(vertex);
+      gl.deleteShader(fragment);
+    },
+  };
+}
+
+
+
+
+let boardScene = null,
+  assetOpen = false,
+  historyOffset = 0,
+  sceneError = "",
+  followState = true;
+const STANDALONE = !!window.KENTOPOLY_STANDALONE;
+const root = document.querySelector("#app"),
+  modalRoot = document.querySelector("#modal-root");
+let local = STANDALONE,
+  state = null,
+  full = null,
+  me = null,
+  selected = 0,
+  stream = null,
+  connected = false,
+  busy = false,
+  toastTimer,
+  confirmCommand = null,
+  screen = "home",
+  joinToken = new URLSearchParams(location.search).get("join") || "",
+  homeTab = joinToken ? "join" : "create";
+const e = (v) =>
+  String(v ?? "").replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+  );
+const rng = (n) => {
+  const max = Math.floor(4294967296 / n) * n;
+  let v;
+  do {
+    v = crypto.getRandomValues(new Uint32Array(1))[0];
+  } while (v >= max);
+  return v % n;
+};
+const bank = (p) => BANKS.find((b) => b.id === p?.bank) || BANKS[0];
+const pawn = (p) => PAWNS.find((x) => x.id === p?.pawn) || PAWNS[0];
+const chip = (p) =>
+  `<span class="bankchip" style="--bank:${bank(p).color};color:${bank(p).id === "tbank" ? "#242b32" : "#fff"}" aria-label="${e(bank(p).name)}">${e(bank(p).mark)}</span>`;
+const pawnChip = (p) =>
+  `<span class="pawnchip" aria-label="Фигурка: ${e(pawn(p).name)}">${e(pawn(p).mark)}</span>`;
+const btn = (action, text, primary = false, disabled = false, attrs = "") => {
+  const extra = attrs.match(/class="([^"]*)"/)?.[1] || "";
+  attrs = attrs.replace(/class="[^"]*"/, "");
+  return `<button data-action="${action}" class="${primary ? "primary" : ""} ${extra}" ${disabled ? "disabled" : ""} ${attrs}>${text}</button>`;
+};
+function toast(text) {
+  clearTimeout(toastTimer);
+  document.querySelector("#toast")?.remove();
+  const x = document.createElement("div");
+  x.id = "toast";
+  x.className = "toast";
+  x.setAttribute("role", "status");
+  x.textContent = text;
+  document.body.append(x);
+  toastTimer = setTimeout(() => x.remove(), 4500);
+}
+function banksOptions(value, exclude = []) {
+  return BANKS.map(
+    (b) =>
+      `<option value="${b.id}" ${b.id === value ? "selected" : ""} ${exclude.includes(b.id) ? "disabled" : ""}>${e(b.name)}${exclude.includes(b.id) ? " · занят" : ""}</option>`,
+  ).join("");
+}
+function choiceGrid(items, value, exclude, action, kind) {
+  return `<div class="choice-grid ${kind}-choices">${items
+    .map((item) => {
+      const blocked = exclude.includes(item.id),
+        chosen = item.id === value;
+      return `<button type="button" data-action="${action}" data-value="${item.id}" class="choice-card ${chosen ? "chosen" : ""}" ${blocked ? "disabled" : ""} aria-pressed="${chosen}">${kind === "bank" ? `<i style="--choice:${item.color}">${e(item.mark)}</i>` : `<i>${e(item.mark)}</i>`}<span>${e(item.name)}</span>${blocked ? "<small>занято</small>" : ""}</button>`;
+    })
+    .join("")}</div>`;
+}
+function home() {
+  return `<main class="landing"><section class="intro"><div class="eyebrow">Дружеский капитализм</div><h1>От однушки<br>до своей империи.</h1><p>Покупай знакомые бренды, договаривайся с кентами и собери четыре фонтана. Или четыре монополии.</p></section><section class="card setup-card"><div class="setup-step">Настрой место за столом</div><h2>${local ? "Собрать кентов за экраном" : "Собрать свой стол"}</h2><p class="muted smalltext">${local ? "Выбери своё место. Остальные фигурки распределятся между игроками за этим экраном." : "Выбери банк и отдельную фигурку. В лобби выбор можно изменить до готовности."}</p>${!local ? `<div class="tabs">${btn("tab-create", "Создать", homeTab === "create")}${btn("tab-join", "По ссылке", homeTab === "join")}</div>` : ""}<label for="nickname">Твой ник</label><input id="nickname" maxlength="24" placeholder="Например, Panty" value="Кент"><input id="bank-choice" type="hidden" value="sber"><input id="pawn-choice" type="hidden" value="classic"><label>Выбери банк</label>${choiceGrid(BANKS, "sber", [], "home-bank", "bank")}<label>Выбери фигурку</label>${choiceGrid(PAWNS, "classic", [], "home-pawn", "pawn")}${local ? `<label for="local-count">Сколько игроков</label><select id="local-count">${[2, 3, 4, 5, 6].map((n) => `<option ${n === 3 ? "selected" : ""}>${n}</option>`).join("")}</select><div class="notice">Это не боты: передавай управление по очереди. Для игры с разных устройств нужен сервер.</div><div class="stack">${btn("start-local", "Начать локальную партию →", true)}${full ? btn("resume-local", "Продолжить сохранённую") : ""}</div>` : `${homeTab === "join" ? '<label for="invite-input">Ссылка-приглашение</label><input id="invite-input" placeholder="Вставь ссылку от друга" value="' + e(joinToken ? location.origin + "/?join=" + joinToken : "") + '">' : ""}<div class="below">${btn(homeTab === "create" ? "create-online" : "join-online", homeTab === "create" ? "Создать комнату →" : "Зайти за стол →", true, false, 'class="wide primary"')}</div><div class="divider"></div>${btn("switch-local", "Попробовать на одном экране", false, false, 'class="wide"')}`}</section></main>`;
+}
+function lobby() {
+  const p = player(state, me),
+    inv = joinToken ? location.origin + location.pathname + "?join=" + joinToken : "",
+    takenBanks = state.players.filter((q) => q.id !== me).map((q) => q.bank),
+    takenPawns = state.players.filter((q) => q.id !== me).map((q) => q.pawn),
+    readyCount = state.players.filter((q) => q.ready).length;
+  return `<main class="lobby"><section class="card lobby-main"><div class="eyebrow">До первого броска</div><div class="lobby-heading"><h2>Твой стол · ${state.players.length}/6</h2><span>${readyCount}/${state.players.length} готовы</span></div><div class="seat-list">${state.players.map((q) => `<div class="playerline ${q.ready ? "is-ready" : ""}">${pawnChip(q)}${chip(q)}<div class="grow"><strong>${e(q.name)} ${q.id === me ? "· ты" : ""}</strong><span class="muted smalltext">${e(pawn(q).name)} · ${e(bank(q).name)}</span></div><span class="badge">${q.ready ? "Готов ✓" : "Выбирает"}</span></div>`).join("")}</div><div class="choice-section"><label>Твой банк</label>${choiceGrid(BANKS, p.bank, takenBanks, "lobby-bank", "bank")}<label>Твоя фигурка</label>${choiceGrid(PAWNS, p.pawn, takenPawns, "lobby-pawn", "pawn")}</div><div class="notice auto-start">Когда минимум два игрока нажмут «Готово», партия начнётся автоматически.</div>${btn("ready", p.ready ? "Готово ✓ · изменить выбор" : "Готово", !p.ready, false, 'class="wide ready-button"')}</section><section class="card lobby-invite"><h2>Пригласи друзей</h2><p class="muted">Отправь приватную ссылку — регистрация не нужна.</p><div class="invite below">${e(inv || "Получаем приглашение…")}</div><div class="below">${btn("copy-invite", "Скопировать ссылку", true, false, 'class="wide"')}</div><div class="divider"></div><div class="metricrow"><span>Начальный капитал</span><strong>$1 000 000</strong></div><div class="metricrow"><span>Выплата за Старт</span><strong>$150 000</strong></div><div class="metricrow"><span>Фонтан</span><strong>$200 000</strong></div></section></main>`;
+}
+const diceHTML = (val) => {
+  const positions = {
+    1: [4],
+    2: [0, 8],
+    3: [0, 4, 8],
+    4: [0, 2, 6, 8],
+    5: [0, 2, 4, 6, 8],
+    6: [0, 2, 3, 5, 6, 8],
+  }[val] || [4];
+  return `<div class="die" aria-label="Кубик: ${val || 1}">${Array.from({ length: 9 }, (_, i) => `<i class="pip ${positions.includes(i) ? "" : "off"}"></i>`).join("")}</div>`;
+};
+function assetCard() {
+  const t = state.tiles[selected],
+    own = player(state, t.owner),
+    isMine = t.owner === me && me === state.active,
+    canManage = state.phase.type === "manage",
+    debt = state.phase.type === "debt";
+  const g = GROUPS.find((g) => g.id === t.group);
+  return `<section class="card"><div class="eyebrow">Клетка ${t.id} · ${e(DISTRICTS[t.district])}</div><div class="selection-title" style="--group:${t.color || "var(--blue)"};margin-top:12px"><h2>${e(t.name)}</h2><p class="smalltext muted">${e(g?.name || (t.type === "fountain" ? "Коллекция фонтанов" : t.type === "risk" ? "Колода больших колебаний" : "Специальная клетка"))}</p></div>${t.price ? `<div class="bigmoney">${money(t.price)}</div><div class="metricrow"><span>Владелец</span><strong>${own ? e(own.name) : "Банк игры"}</strong></div><div class="metricrow"><span>Комиссия сейчас</span><strong>${money(fee(state, t))}</strong></div>${t.type === "property" ? `<div class="metricrow"><span>Уровень</span><strong>${t.level}/3${state.award === t.id ? " · ★ ×2" : ""}</strong></div><div class="metricrow"><span>Следующий уровень</span><strong>${t.level < 3 ? money(t.price / 2) : "Максимум"}</strong></div>` : `<div class="metricrow"><span>Автоступень</span><strong>${own ? fountains(state, own.id) : 0} / 4</strong></div>`}${own ? `<div class="metricrow"><span>Продать банку</span><strong>${money(liquidation(t))}</strong></div>` : ""}${isMine && (canManage || debt) ? `<div class="stack below">${canManage && t.type === "property" ? btn("upgrade", "Улучшить", true, state.upgradeUsed || t.level >= 3 || player(state, me).cash < t.price / 2, `data-id="${t.id}"`) : ""}${t.level ? btn("sell-level", "Продать уровень · " + money(t.price / 4), false, false, `data-id="${t.id}"`) : ""}${btn("sell-property", "Продать объект · " + money(liquidation(t)), false, false, `data-id="${t.id}"`)}</div>` : ""}` : `<p class="muted smalltext below">${{ start: "При обычном прохождении +$150 000. Поиск не платит за телепорт.", jail: "Обычная остановка — визит. При аресте: дубль, пропуск или $50 000.", search: "Выбери любую клетку. Только один Поиск за полный ход.", award: "Один кубок на партию. Прикрепи к своему бизнесу: комиссия ×2.", chance: "Вытяни карту небольшого события, перемещения или Тюрьмы.", risk: "Карта может дать или забрать от $50 000 до $350 000.", tax: "Обязательный платёж банку игры: " + money(t.tax || 0) + ".", rest: "Нейтральная клетка. Можно выдохнуть." }[t.type]}</p>`}${state.phase.type === "search" && me === state.active ? `<div class="below">${btn("go-selected", "Переместиться сюда", true)}</div>` : ""}${state.phase.type === "award" && me === state.active && t.owner === me && t.type === "property" ? `<div class="below">${btn("award-selected", "Передать кубок сюда", true)}</div>` : ""}</section>`;
+}
+function actionPanel() {
+  const a = active(state),
+    p = player(state, me),
+    my = me === state.active,
+    ph = state.phase,
+    t = state.tiles[ph.tile],
+    enabled = local || connected;
+  let title = "Твой ход",
+    desc = "",
+    body = "";
+  if (state.status === "finished")
+    return `<section class="card"><h2>Партия завершена</h2><p>Журнал и итоговое владение остаются на поле.</p>${local ? '<div class="below">' + btn("new-local", "Новая локальная партия", true) + "</div>" : ""}</section>`;
+  if (ph.type === "auction") {
+    title = "Аукцион";
+    desc =
+      e(t.name) +
+      " · минимум " +
+      money(t.price / 2) +
+      ". Одна скрытая ставка. Порядок хода решает ничью.";
+    body =
+      state.myBid !== null
+        ? `<div class="notice">Твоя ставка: ${money(state.myBid)}. Ответили ${state.bidCount}/${state.players.filter((p) => !p.out).length}.</div>`
+        : `<label for="bid-cash">Ставка в долларах</label><input id="bid-cash" type="number" min="${t.price / 2}" step="1000" value="${t.price / 2}"><div class="actions below">${btn("bid", "Подать ставку", true)}${btn("pass-bid", "Пас")}</div>`;
+  } else if (ph.type === "debt") {
+    title = "План спасения";
+    const gap = ph.amount - a.cash;
+    desc =
+      e(a.name) + " должен " + money(ph.amount) + ". Не хватает " + money(Math.max(0, gap)) + ".";
+    if (my) {
+      body = `<div class="stack">${btn("rescue-lot", "1. Аукцион / предложения", true, assets(state, me).length === 0)}${btn("loan", "2. Кредит ЦБ", false, !!p.loan || gap > 500000)}${btn("liquidate", "3. Продать имущество", false, assets(state, me).length === 0)}</div><p class="smalltext muted below">Общий таймер не продлевается. Кредит только по явному согласию.</p>`;
+      if (state.rescue)
+        body += `<div class="notice">Лот: ${state.rescue.ids.map((id) => e(state.tiles[id].name)).join(", ")}</div>${state.rescue.offers.map((o) => `<div class="offer"><strong>${e(player(state, o.bidder).name)}: ${money(o.cash)}</strong>${o.give.length ? "<p>Имущество: " + o.give.map((id) => e(state.tiles[id].name)).join(", ") + "</p>" : ""}<div class="below">${btn("accept-rescue", "Принять", true, false, `data-bidder="${e(o.bidder)}"`)}</div></div>`).join("")}${btn("cancel-lot", "Снять лот")}`;
+    } else
+      body = state.rescue
+        ? `<div class="notice">Продаётся: ${state.rescue.ids.map((id) => e(state.tiles[id].name)).join(", ")}</div>${btn("make-rescue-offer", "Предложить сделку", true)}${state.rescue.offers.length ? '<p class="smalltext below">Твоё предложение отправлено.</p>' + btn("withdraw-offer", "Отозвать") : ""}`
+        : '<p class="muted smalltext">Должник выбирает, как получить деньги. Когда появится лот, можно предложить сделку.</p>';
+  } else if (!my) {
+    title = "Ход " + e(a.name);
+    desc = "Сейчас решения принимает другой игрок.";
+    body = '<p class="smalltext muted">Можно изучать поле и свой портфель.</p>';
+  } else
+    switch (ph.type) {
+      case "roll":
+        title = "Бросаем кубики?";
+        desc = "Твой банк — " + e(bank(p).name) + ". Выплата за Старт: $150 000.";
+        body = btn("roll", "Бросить два кубика", true, false, 'class="primary wide"');
+        break;
+      case "purchase":
+        title = "Свободный актив";
+        desc = e(t.name) + " · " + money(t.price) + ". Купить или выставить на аукцион для всех.";
+        body = `<div class="stack">${btn("buy", "Купить за " + money(t.price), true, p.cash < t.price)}${btn("auction", "На аукцион")}</div>`;
+        break;
+      case "takeover":
+        title = "Можно выкупить";
+        desc =
+          "Комиссия уже оплачена. " +
+          e(t.name) +
+          " можно принудительно выкупить у " +
+          e(player(state, t.owner)?.name) +
+          ".";
+        body = `<div class="stack">${btn("takeover", "Выкупить · " + money(buyout(t)), true, p.cash < buyout(t))}${btn("skip", "Оставить владельцу")}</div>`;
+        break;
+      case "search":
+        title = "Куда отправимся?";
+        desc =
+          "Выбери любую клетку на поле, затем подтверди перемещение. Телепорт не даёт зарплату.";
+        body = `<label for="search-target">Клетка назначения</label><select id="search-target">${state.tiles.map((t) => `<option value="${t.id}" ${selected === t.id ? "selected" : ""}>${t.id} · ${e(t.name)}</option>`).join("")}</select><div class="actions below">${btn("go-selected", "Переместиться", true)}${btn("skip", "Пропустить")}</div>`;
+        break;
+      case "award":
+        title = "2026 Awards";
+        desc = "Единственный кубок даёт ×2 комиссии. На прежнем здании бонус исчезнет.";
+        body = `<label for="award-target">Твой бизнес</label><select id="award-target">${assets(
+          state,
+          me,
+        )
+          .filter((t) => t.type === "property")
+          .map((t) => `<option value="${t.id}">${e(t.name)} · ${money(fee(state, t))}</option>`)
+          .join(
+            "",
+          )}</select><div class="actions below">${btn("claim-award", "Передать кубок", true)}${btn("skip", "Отказаться")}</div>`;
+        break;
+      case "jail":
+        title = "В Тюрьме";
+        desc =
+          "Попытка " + (p.attempts + 1) + "/3. Дубль освободит, но не даст дополнительный бросок.";
+        body = `<div class="stack">${btn("jail-roll", "Попытаться выбросить дубль", true)}${btn("jail-pay", "Выйти за $50 000")}${btn("jail-card", "Использовать пропуск", false, !p.release)}</div>`;
+        break;
+      case "manage":
+        title = "Управляй капиталом";
+        desc = "Одно улучшение за полный ход. Выбери свой бизнес на поле или предложи обмен.";
+        body = `<div class="stack">${btn("end", "Завершить ход →", true)}${btn("trade", "Предложить обмен")}${btn("liquidate", "Моё имущество", false, !assets(state, me).length)}${p.loan ? btn("repay", "Погасить ЦБ · " + money(p.loan.total), false, p.cash < p.loan.total) : ""}</div>`;
+        break;
+    }
+  if (state.trade && state.trade.to === me) {
+    const o = state.trade;
+    body += `<div class="offer"><strong>Предложение от ${e(player(state, o.from).name)}</strong><p>Получишь: ${money(o.pay)}${o.give.map((id) => " · " + e(state.tiles[id].name)).join("")}</p><p>Отдашь: ${money(o.receive)}${o.take.map((id) => " · " + e(state.tiles[id].name)).join("")}</p><div class="actions">${btn("accept-trade", "Принять", true)}${btn("reject-trade", "Отклонить")}</div></div>`;
+  }
+  if (state.trade?.from === me)
+    body += `<div class="notice">Предложение обмена ожидает ответа.</div>${btn("cancel-trade", "Отменить обмен")}`;
+  const phaseBadge =
+    {
+      roll: ["🎲", "Бросок"],
+      purchase: ["◆", "Сделка"],
+      auction: ["⚒", "Аукцион"],
+      takeover: ["⚡", "Выкуп"],
+      search: ["⌖", "Маршрут"],
+      award: ["★", "Awards"],
+      jail: ["▦", "Тюрьма"],
+      debt: ["!", "Спасение"],
+      manage: ["▣", "Управление"],
+    }[ph.type] || ["●", "Ход"];
+  return `<section class="card action-card phase-${ph.type}"><div class="phase-kicker"><span class="phase-emblem" aria-hidden="true">${phaseBadge[0]}</span><span>Ход ${state.turn} · ${phaseBadge[1]}</span></div><div class="phase-title"><h2>${title}</h2><span class="timer" data-deadline="${ph.until}"></span></div><p class="phase-desc">${desc}</p><fieldset ${!enabled || busy ? "disabled" : ""} style="border:0;margin:0;padding:0;min-width:0">${body}</fieldset></section>`;
+}
+function playerDock() {
+  return `<section class="player-dock" aria-label="Игроки">${state.players.map((p, index) => `<article class="player-glass ${p.id === state.active ? "active" : ""} ${p.out ? "out" : ""}" style="--player-color:${bank(p).color}"><span class="seat-number">${String(index + 1).padStart(2, "0")}</span>${p.id === state.active && !p.out ? '<span class="active-flag">ХОД</span>' : ""}<div class="row">${chip(p)}<strong>${e(p.name)}</strong></div><div class="dock-money">${money(p.cash)}</div><div class="dock-meta">${p.out ? "ВЫБЫЛ" : `⛲ ${fountains(state, p.id)}/4 · ◈ ${monopolies(state, p.id).length}/4`}${p.jail ? " · ▦ ТЮРЬМА" : ""}${p.loan ? ` · ЦБ ${money(p.loan.total)}` : ""}</div></article>`).join("")}</section>`;
+}
+const previewTable = createGame("preview-table", 2026);
+function game() {
+  const a = active(state),
+    p = player(state, me);
+  return `<header class="hud-top"><div class="hud-brand"><i aria-hidden="true">K</i><div>Kentopoly<span>TABLETOP EDITION</span></div></div><div class="turn-banner"><span class="turn-pulse" aria-hidden="true"></span><div><strong>${state.status === "finished" ? "Партия завершена" : e(a?.name) + ", твой ход"}</strong><span>${local ? "Один экран" : connected ? "Онлайн · до 6 игроков" : "Переподключение…"}</span></div><b>ХОД ${state.turn}</b></div><div class="hud-tools">${
+    local
+      ? `<label class="control-label" for="control-player">Игрок<select id="control-player">${state.players
+          .filter((q) => !q.out)
+          .map(
+            (q) => `<option value="${q.id}" ${q.id === me ? "selected" : ""}>${e(q.name)}</option>`,
+          )
+          .join("")}</select></label>`
+      : `<span class="my-bank">${chip(p)}${e(p.name)}</span>`
+  }${btn("table-menu", "☰ Меню")}</div></header>${playerDock()}
+<aside class="hud-actions" data-phase="${state.phase.type}" aria-label="Игровые действия">${state.status === "finished" ? `<section class="card finish"><h2>${state.winners.length ? state.winners.map((w) => e(player(state, w.id).name)).join(" и ") + " — победа!" : "Ничья"}</h2><p>${state.winners.map((w) => w.reasons.join(" + ")).join(" · ")}</p>${btn("home", "Новая партия")}</section>` : actionPanel()}<div class="asset-switch">${btn("toggle-asset", (assetOpen ? "− " : "+ ") + e(state.tiles[selected]?.name || "Объект"), false, false, 'aria-expanded="' + assetOpen + '"')}</div>${assetOpen ? `<div class="asset-inspector">${assetCard()}</div>` : ""}</aside>
+<footer class="hud-bottom"><div class="camera-buttons">${btn("camera-overview", "◎ Поле", false, false, 'aria-label="Общий вид поля"')}${btn("camera-follow", followState ? "⌖ Фишка ✓" : "⌖ Фишка", false, false, 'id="follow-toggle"')}${btn("camera-left", "↶", false, false, 'aria-label="Поворот влево"')}${btn("camera-right", "↷", false, false, 'aria-label="Поворот вправо"')}${btn("camera-zoom-in", "+", false, false, 'aria-label="Приблизить"')}${btn("camera-zoom-out", "−", false, false, 'aria-label="Отдалить"')}</div><label class="tile-picker-label" for="tile-picker"><span>Цель</span><select id="tile-picker">${state.tiles.map((t) => `<option value="${t.id}" ${t.id === selected ? "selected" : ""}>${t.id} · ${e(t.name)}</option>`).join("")}</select></label><div class="history-controls">${btn("history-back", "‹ Ранее")}${btn("history-latest", "Сейчас ›")}</div></footer>
+<div id="board-chronicle" class="board-chronicle" aria-label="Хроника на поле"></div><div id="dice-result" class="dice-result" aria-live="polite"></div><div id="camera-status" class="camera-status"></div><div id="hover-tile" class="sr-only"></div><div id="pawn-caption" class="pawn-caption"></div><div class="sr-only" aria-live="polite">${e(state.log.at(-1)?.text || "")}</div>`;
+}
+function render() {
+  const playing = !!state && screen === "game" && state.status !== "lobby";
+  document.body.classList.toggle("is-playing", playing);
+  const entry = playing
+    ? ""
+    : `<header class="entry-title"><i aria-hidden="true">K</i><div>Kentopoly<span>ЭКОНОМИЧЕСКАЯ НАСТОЛКА</span></div></header><div class="entry-slogan"><strong>Твой стол.<br>Твои кенты.<br>Твоя империя.</strong><span>2–6 игроков · 40 клеток · один победитель</span></div><div class="entry-overlay">${screen === "home" || !state ? home().replace(/<section class="intro">[\s\S]*?<\/section>/, "") : lobby()}</div>`;
+  root.innerHTML = `<main class="table-world ${playing ? "live-table" : "entry-table"}"><div id="scene-host"></div>${playing ? game() : entry}${sceneError ? `<section class="graphics-error"><h2>Нужна поддержка 3D</h2><p>${e(sceneError)}</p><p>Включи аппаратное ускорение браузера или открой игру на устройстве с WebGL. Резервного поля больше нет.</p>${btn("retry-graphics", "Повторить")}</section>` : ""}</main>`;
+  updateTimers();
+  if (!sceneError)
+    try {
+      if (!boardScene)
+        boardScene = createBoardScene({
+          onSelect(id) {
+            if (!state || screen !== "game" || state.status === "lobby") return;
+            selected = id;
+            assetOpen = true;
+            render();
+          },
+          onModeChange(mode) {
+            followState = mode === "follow";
+            const b = document.querySelector("#follow-toggle");
+            if (b) b.textContent = followState ? "Следить ✓" : "Следить";
+          },
+          onError(message) {
+            sceneError = message;
+            boardScene?.destroy();
+            boardScene = null;
+            render();
+          },
+        });
+      document.querySelector("#scene-host").append(boardScene.canvas);
+      boardScene.update(
+        playing ? state : previewTable,
+        playing ? me : null,
+        playing ? selected : -1,
+      );
+      boardScene.setHistoryOffset(historyOffset);
+    } catch (error) {
+      sceneError = error.message;
+      boardScene?.destroy();
+      boardScene = null;
+      render();
+    }
+}
+function receive(data) {
+  if (state && state.id === data.state.id && data.state.version < state.version) return;
+  state = migrateTableLayout(data.state);
+  me = data.me;
+  if (data.invite) joinToken = data.invite;
+  screen = "game";
+  if (["purchase", "auction", "takeover"].includes(state.phase.type)) selected = state.phase.tile;
+  render();
+}
+function localUpdate(next) {
+  const old = full?.active;
+  full = migrateTableLayout(next);
+  if (!me || old !== full.active || player(full, me)?.out) me = full.active;
+  state = publicState(full, me);
+  screen = "game";
+  try {
+    full.savedAt = Date.now();
+    localStorage.setItem("kentopoly-alpha-save", JSON.stringify(full));
+  } catch {}
+  if (["purchase", "auction", "takeover"].includes(state.phase.type)) selected = state.phase.tile;
+  render();
+}
+function startLocal() {
+  stream?.close();
+  stream = null;
+  local = true;
+  const n = Number(document.querySelector("#local-count")?.value || 3),
+    name = document.querySelector("#nickname")?.value || "Кент",
+    chosenBank = val("bank-choice") || BANKS[0].id,
+    chosenPawn = val("pawn-choice") || PAWNS[0].id,
+    localBanks = [BANKS.find((b) => b.id === chosenBank), ...BANKS.filter((b) => b.id !== chosenBank)],
+    localPawns = [PAWNS.find((p) => p.id === chosenPawn), ...PAWNS.filter((p) => p.id !== chosenPawn)];
+  let g = createGame("local", rng(4294967296));
+  for (let i = 0; i < n; i++) {
+    addPlayer(
+      g,
+      "p" + i,
+      i === 0 ? name : ["Друг", "Сосед", "Коллега", "Бизнесмен", "Легенда"][i - 1],
+      localBanks[i].id,
+      localPawns[i].id,
+    );
+    g.players[i].ready = true;
+  }
+  g = apply(g, "p0", { type: "start" }, Date.now(), rng);
+  full = null;
+  me = null;
+  selected = 0;
+  localUpdate(g);
+}
+async function api(url, data) {
+  const opts = data
+    ? {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    : {};
+  const res = await fetch(url, opts);
+  const result = await res.json();
+  if (!res.ok) {
+    if (result.state) receive(result);
+    throw Error(result.error || "Ошибка сервера");
+  }
+  return result;
+}
+function connect() {
+  stream?.close();
+  stream = new EventSource("/api/events");
+  stream.onopen = () => {
+    connected = true;
+    render();
+  };
+  stream.onmessage = (ev) => {
+    connected = true;
+    receive(JSON.parse(ev.data));
+  };
+  stream.onerror = () => {
+    connected = false;
+    render();
+  };
+}
+async function send(command) {
+  if (busy) return;
+  busy = true;
+  try {
+    if (local) localUpdate(apply(full, me, command, Date.now(), rng));
+    else {
+      if (!connected) throw Error("Нет связи с сервером");
+      const commandId = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) =>
+        b.toString(16).padStart(2, "0"),
+      ).join("");
+      receive(await api("/api/cmd", { commandId, version: state.version, command }));
+    }
+    closeDialog();
+  } catch (err) {
+    toast(err.message);
+  } finally {
+    busy = false;
+    render();
+  }
+}
+function dialog(title, body, actions = "") {
+  modalRoot.innerHTML = `<div class="modal-shade"><section role="dialog" aria-modal="true" aria-labelledby="modal-title" class="modal"><h2 id="modal-title">${e(title)}</h2>${body}<div class="actions">${btn("close-dialog", "Закрыть")}${actions}</div></section></div>`;
+  modalRoot.querySelector("input,select,button")?.focus();
+}
+function closeDialog() {
+  modalRoot.innerHTML = "";
+  confirmCommand = null;
+}
+function confirmAction(title, text, command) {
+  confirmCommand = command;
+  dialog(title, `<p>${text}</p>`, btn("confirm-command", "Подтвердить", true));
+}
+const ids = (name) =>
+  [...document.querySelectorAll(`input[name="${name}"]:checked`)].map((x) => Number(x.value));
+function checks(list, name) {
+  return `<div class="checks">${list.length ? list.map((t) => `<label class="check"><input type="checkbox" name="${name}" value="${t.id}">${e(t.name)} · ${money(t.price)}${state.award === t.id ? " ★" : ""}</label>`).join("") : '<p class="smalltext muted">Нет имущества</p>'}</div>`;
+}
+function tradeDialog(to) {
+  const others = state.players.filter((p) => !p.out && p.id !== me);
+  to = to || others[0]?.id;
+  if (!to) return;
+  dialog(
+    "Предложить обмен",
+    `<label for="trade-to">Кому</label><select id="trade-to">${others.map((p) => `<option value="${e(p.id)}" ${p.id === to ? "selected" : ""}>${e(p.name)}</option>`).join("")}</select><label>Отдаю имущество</label>${checks(assets(state, me), "trade-give")}<label for="trade-pay">И деньги ($)</label><input type="number" id="trade-pay" value="0" min="0" step="1000"><label>Получаю имущество</label>${checks(assets(state, to), "trade-take")}<label for="trade-receive">И деньги ($)</label><input type="number" id="trade-receive" value="0" min="0" step="1000"><p class="smalltext muted below">Уровни и кубок остаются на зданиях. Получатель должен согласиться в течение 20 секунд.</p>`,
+    btn("submit-trade", "Отправить предложение", true),
+  );
+}
+const val = (id) => document.getElementById(id)?.value;
+async function handle(action, target) {
+  switch (action) {
+    case "camera-overview":
+      boardScene?.overview();
+      break;
+    case "camera-follow":
+      boardScene?.toggleFollow();
+      break;
+    case "camera-left":
+      boardScene?.rotate(-0.22);
+      break;
+    case "camera-right":
+      boardScene?.rotate(0.22);
+      break;
+    case "camera-zoom-in":
+      boardScene?.zoom(0.9);
+      break;
+    case "camera-zoom-out":
+      boardScene?.zoom(1.1);
+      break;
+    case "toggle-asset":
+      assetOpen = !assetOpen;
+      render();
+      break;
+    case "history-back":
+      historyOffset = Math.min(Math.max(0, state.log.length - 1), historyOffset + 1);
+      boardScene?.setHistoryOffset(historyOffset);
+      break;
+    case "history-latest":
+      historyOffset = 0;
+      boardScene?.setHistoryOffset(0);
+      break;
+    case "retry-graphics":
+      sceneError = "";
+      boardScene?.destroy();
+      boardScene = null;
+      render();
+      break;
+    case "table-menu":
+      dialog(
+        "За этим столом",
+        `<div class="stack">${btn("portfolio", "Мой портфель")}${btn("rules", "Правила")}${state?.status === "playing" && me === state.active ? btn("surrender", "Выйти из партии") : ""}${btn("home", "Лобби / новая партия")}</div><p class="smalltext muted">Только игровые деньги. Онлайн требует работающего сервера.</p>`,
+      );
+      break;
+    case "tab-create":
+      homeTab = "create";
+      render();
+      break;
+    case "tab-join":
+      homeTab = "join";
+      render();
+      break;
+    case "home":
+      closeDialog();
+      screen = "home";
+      render();
+      break;
+    case "switch-local":
+      stream?.close();
+      local = true;
+      screen = "home";
+      render();
+      break;
+    case "start-local":
+      startLocal();
+      break;
+    case "resume-local":
+      if (full) {
+        me = full.active;
+        localUpdate(full);
+      }
+      break;
+    case "new-local":
+      screen = "home";
+      render();
+      break;
+    case "create-online":
+    case "join-online": {
+      try {
+        let invite = val("invite-input") || joinToken;
+        try {
+          invite = new URL(invite).searchParams.get("join") || invite;
+        } catch {}
+        const data = await api(action === "create-online" ? "/api/create" : "/api/join", {
+          name: val("nickname"),
+          bank: val("bank-choice"),
+          pawn: val("pawn-choice"),
+          invite,
+        });
+        local = false;
+        receive(data);
+        connect();
+      } catch (err) {
+        toast(err.message);
+      }
+      break;
+    }
+    case "home-bank":
+    case "home-pawn": {
+      const kind = action.slice(5),
+        input = document.querySelector(`#${kind}-choice`),
+        grid = target.closest(".choice-grid");
+      if (input) input.value = target.dataset.value;
+      for (const option of grid?.querySelectorAll(".choice-card") || []) {
+        const chosen = option === target;
+        option.classList.toggle("chosen", chosen);
+        option.setAttribute("aria-pressed", String(chosen));
+      }
+      break;
+    }
+    case "lobby-bank":
+      await send({ type: "bank", bank: target.dataset.value });
+      break;
+    case "lobby-pawn":
+      await send({ type: "pawn", pawn: target.dataset.value });
+      break;
+    case "copy-invite": {
+      const link = location.origin + location.pathname + "?join=" + joinToken;
+      try {
+        await navigator.clipboard.writeText(link);
+        toast("Приглашение скопировано");
+      } catch {
+        dialog("Ссылка-приглашение", `<input readonly value="${e(link)}">`);
+      }
+      break;
+    }
+    case "rules":
+      dialog(
+        "Как играть в Kentopoly",
+        `<p><strong>Три победы:</strong> собрать 4 фонтана, 4 полные цветовые пары или остаться последним игроком.</p><p>Старт: $1 000 000. Проход через Начало: +$150 000. Поиск телепортирует без зарплаты.</p><p>Фонтан стоит $200 000. Комиссия за каждый: $20 000 / $50 000 / $100 000 при 1 / 2 / 3 фонтанах.</p><p>Бизнес: базовая комиссия 10% цены. Уровни ×1 / ×1,75 / ×2,75 / ×4, полная группа ×1,5, один общий кубок Awards ×2. Округление до $1 000 вверх.</p><p>Принудительный выкуп: после комиссии заплати владельцу 2 × (цена + стоимость уровней). Не для фонтанов.</p><p>При долге есть 120 секунд: продать лот друзьям, получить кредит ЦБ или самому продать имущество банку. Кредит: до $500 000 на нехватку, 10% разово, возврат в пятый следующий свой ход.</p><p>3D: перетаскивание поворачивает камеру, колёсико меняет масштаб. Автокамера следует за движущейся фишкой и возвращается к общему виду. Кнопка «Общий вид» сбрасывает ракурс. При reduced-motion сопровождение отключено. Это альфа, не законченный MVP: нет фирменной графики, автоматического исключения AFK, управления хозяином и переноса места на другое устройство. Подробности в README архива.</p>`,
+      );
+      break;
+    case "portfolio":
+    case "liquidate": {
+      const own = assets(state, me);
+      dialog(
+        action === "portfolio" ? "Твой портфель" : "Выбери имущество",
+        own.length
+          ? own
+              .map(
+                (t) =>
+                  `<div class="playerline"><div class="grow"><strong>${e(t.name)}${state.award === t.id ? " ★" : ""}</strong><span class="smalltext muted">Уровень ${t.level} · банку ${money(liquidation(t))}</span></div>${btn("select-asset", "Открыть", false, false, `data-id="${t.id}"`)}</div>`,
+              )
+              .join("")
+          : "<p>Пока нет недвижимости. Впереди целое поле.</p>",
+      );
+      break;
+    }
+    case "select-asset":
+      assetOpen = true;
+      selected = Number(target.dataset.id);
+      closeDialog();
+      render();
+      document
+        .querySelector(".selection-title")
+        ?.scrollIntoView({ block: "center", behavior: "smooth" });
+      break;
+    case "journal":
+      closeDialog();
+      historyOffset = 0;
+      boardScene?.setHistoryOffset(0);
+      break;
+    case "close-dialog":
+      closeDialog();
+      break;
+    case "confirm-command": {
+      const c = confirmCommand;
+      await send(c);
+      break;
+    }
+    case "ready":
+    case "start":
+    case "roll":
+    case "buy":
+    case "auction":
+    case "skip":
+    case "end":
+    case "repay":
+      await send({ type: action });
+      break;
+    case "bid":
+      await send({ type: "bid", amount: Number(val("bid-cash")) });
+      break;
+    case "pass-bid":
+      await send({ type: "bid", amount: 0 });
+      break;
+    case "jail-roll":
+    case "jail-pay":
+    case "jail-card":
+      await send({ type: "jail", choice: action.slice(5) });
+      break;
+    case "go-selected":
+      confirmAction(
+        "Переместиться?",
+        `Цель: <strong>${e(state.tiles[selected].name)}</strong>. Сработает полный эффект клетки. Зарплаты за телепорт нет.`,
+        { type: "search", tile: selected },
+      );
+      break;
+    case "claim-award":
+      await send({ type: "award", tile: Number(val("award-target")) });
+      break;
+    case "award-selected":
+      await send({ type: "award", tile: selected });
+      break;
+    case "upgrade":
+      await send({ type: "upgrade", tile: Number(target.dataset.id) });
+      break;
+    case "sell-level":
+    case "sell-property": {
+      const id = Number(target.dataset.id),
+        t = state.tiles[id],
+        levelOnly = action === "sell-level";
+      confirmAction(
+        "Продать банку?",
+        `${e(t.name)}: получишь ${money(levelOnly ? t.price / 4 : liquidation(t))}. ${!levelOnly && state.award === id ? "Кубок вернётся на церемонию." : ""}`,
+        { type: "sell", tile: id, levelOnly },
+      );
+      break;
+    }
+    case "takeover": {
+      const t = state.tiles[state.phase.tile];
+      confirmAction(
+        "Принудительный выкуп",
+        `${e(t.name)}: ${money(buyout(t))} получит ${e(player(state, t.owner).name)}. Комиссия уже оплачена, уровни и кубок остаются на здании.`,
+        { type: "takeover" },
+      );
+      break;
+    }
+    case "loan": {
+      const p = player(state, me),
+        n = state.phase.amount - p.cash,
+        total = n + Math.ceil(n / 10000) * 1000;
+      confirmAction(
+        "Договор с игровым ЦБ",
+        `Заём: <strong>${money(n)}</strong>, сразу на оплату текущего долга. Вернуть <strong>${money(total)}</strong> в начале своего хода №${p.ownTurn + 5}, включая тюремные ходы. Досрочное погашение не уменьшает разовую плату.`,
+        { type: "loan", principal: n, total },
+      );
+      break;
+    }
+    case "rescue-lot":
+      dialog(
+        "Лот для спасения",
+        `<p>Выбери активы. Другие игроки предложат деньги или деньги с имуществом. Ты сам решаешь, какое предложение принять.</p>${checks(assets(state, me), "rescue-lot")}`,
+        btn("submit-lot", "Выставить лот", true),
+      );
+      break;
+    case "submit-lot":
+      await send({ type: "rescueLot", ids: ids("rescue-lot") });
+      break;
+    case "cancel-lot":
+      await send({ type: "cancelLot" });
+      break;
+    case "make-rescue-offer":
+      dialog(
+        "Сделка за лот",
+        `<p>${state.rescue.ids.map((id) => e(state.tiles[id].name)).join(", ")}</p><label for="rescue-cash">Деньги должнику ($)</label><input id="rescue-cash" type="number" min="1000" step="1000" value="100000"><label>Дополнительно отдаю имущество</label>${checks(assets(state, me), "rescue-give")}<p class="smalltext muted below">Деньги резервируются до ответа, отзыва или истечения 30 секунд.</p>`,
+        btn("submit-rescue", "Отправить предложение", true),
+      );
+      break;
+    case "submit-rescue":
+      await send({
+        type: "rescueOffer",
+        cash: Number(val("rescue-cash")),
+        give: ids("rescue-give"),
+      });
+      break;
+    case "withdraw-offer":
+      await send({ type: "withdrawOffer" });
+      break;
+    case "accept-rescue":
+      confirmAction(
+        "Принять сделку?",
+        `Лот перейдёт ${e(player(state, target.dataset.bidder).name)}. Проверь деньги и получаемые объекты в предложении.`,
+        { type: "acceptRescue", bidder: target.dataset.bidder },
+      );
+      break;
+    case "trade":
+      tradeDialog();
+      break;
+    case "submit-trade":
+      await send({
+        type: "trade",
+        to: val("trade-to"),
+        give: ids("trade-give"),
+        take: ids("trade-take"),
+        pay: Number(val("trade-pay")),
+        receive: Number(val("trade-receive")),
+      });
+      break;
+    case "accept-trade":
+      await send({ type: "acceptTrade" });
+      break;
+    case "reject-trade":
+      await send({ type: "rejectTrade" });
+      break;
+    case "cancel-trade":
+      await send({ type: "cancelTrade" });
+      break;
+    case "surrender":
+      confirmAction(
+        "Завершить свою игру?",
+        `Ты выбываешь. Имущество и деньги распределятся по правилам банкротства, кредит ЦБ не исчезнет без расчёта. Вернуться в эту партию нельзя.`,
+        { type: "surrender" },
+      );
+      break;
+  }
+}
+document.addEventListener("click", (ev) => {
+  const t = ev.target.closest("[data-action],[data-tile]");
+  if (!t || t.disabled) return;
+  if (t.dataset.tile !== undefined) {
+    selected = Number(t.dataset.tile);
+    render();
+    return;
+  }
+  Promise.resolve(handle(t.dataset.action, t)).catch((err) => toast(err.message));
+});
+document.addEventListener("change", (ev) => {
+  if (ev.target.id === "tile-picker") {
+    selected = Number(ev.target.value);
+    assetOpen = true;
+    render();
+  }
+  if (ev.target.id === "control-player") {
+    me = ev.target.value;
+    state = publicState(full, me);
+    render();
+  }
+  if (ev.target.id === "search-target") {
+    selected = Number(ev.target.value);
+    assetOpen = true;
+    render();
+  }
+  if (ev.target.id === "trade-to") tradeDialog(ev.target.value);
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape") closeDialog();
+  if (ev.key === "Tab" && modalRoot.firstChild) {
+    const focus = [...modalRoot.querySelectorAll("button:not(:disabled),input,select")];
+    const first = focus[0],
+      last = focus.at(-1);
+    if (ev.shiftKey && document.activeElement === first) {
+      ev.preventDefault();
+      last?.focus();
+    } else if (!ev.shiftKey && document.activeElement === last) {
+      ev.preventDefault();
+      first?.focus();
+    }
+  }
+});
+function updateTimers() {
+  for (const el of document.querySelectorAll("[data-deadline]"))
+    el.textContent =
+      Math.max(0, Math.ceil((Number(el.dataset.deadline) - Date.now()) / 1000)) + " с";
+}
+setInterval(() => {
+  updateTimers();
+  if (local && full?.status === "playing" && screen === "game") {
+    try {
+      const next = tick(full, Date.now(), rng);
+      if (next) localUpdate(next);
+    } catch (err) {
+      toast("Ошибка таймера: " + err.message);
+    }
+  }
+}, 500);
+try {
+  const saved = localStorage.getItem("kentopoly-alpha-save");
+  if (saved) {
+    full = JSON.parse(saved);
+    if (full.status === "playing") {
+      const pause = Date.now() - (full.savedAt || Date.now());
+      full.phase.until += pause;
+      if (full.trade) full.trade.until += pause;
+      if (full.rescue) for (const o of full.rescue.offers) o.until += pause;
+    }
+  }
+} catch {
+  full = null;
+}
+render();
+if (!STANDALONE) {
+  api("/api/me")
+    .then((data) => {
+      if (!joinToken || joinToken === data.invite) {
+        receive(data);
+        connect();
+      }
+    })
+    .catch(() => {});
+}
+window.addEventListener("beforeunload", () => {
+  if (local && full) {
+    try {
+      full.savedAt = Date.now();
+      localStorage.setItem("kentopoly-alpha-save", JSON.stringify(full));
+    } catch {}
+  }
+});
+
+})();</script></body></html>

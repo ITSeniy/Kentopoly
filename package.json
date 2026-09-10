@@ -1,0 +1,15 @@
+{
+  "name": "kentopoly-table",
+  "version": "0.3.0-alpha",
+  "private": true,
+  "type": "module",
+  "description": "Kentopoly: private browser board game for 2–6 friends",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests",
+    "build:demo": "node build-demo.mjs"
+  }
+}
